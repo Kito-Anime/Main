@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KITO ANIME - Official Final Version</title>
+    <title>KITO ANIME - Official Version</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
@@ -22,26 +22,26 @@
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
         body { background-color: var(--dark); color: var(--text); overflow-x: hidden; line-height: 1.6; }
         a { text-decoration: none !important; color: inherit; outline: none; }
-        .container { max-width: 1400px; margin: 0 auto; padding: 0 25px; }
+        .container { max-width: 1400px; margin: 0 auto; padding: 0 20px; }
 
-        /* --- NAVBAR HIỆN ĐẠI --- */
+        /* --- NAVBAR DESKTOP --- */
         .navbar { 
             background: var(--glass); height: 80px; display: flex; 
             align-items: center; position: fixed; top: 0; width: 100%; z-index: 1000; 
             border-bottom: 1px solid var(--border); backdrop-filter: blur(20px);
         }
         .nav-content { width: 100%; display: flex; align-items: center; justify-content: space-between; }
-        .logo { font-size: 26px; font-weight: 900; text-transform: uppercase; cursor: pointer; min-width: 180px; }
+        .logo { font-size: 24px; font-weight: 900; text-transform: uppercase; cursor: pointer; }
         .logo span { color: var(--primary); }
 
-        .nav-right-group { display: flex; align-items: center; gap: 25px; flex-grow: 1; justify-content: flex-end; }
+        .nav-right-side { display: flex; align-items: center; gap: 20px; flex-grow: 1; justify-content: flex-end; }
 
-        /* Tabbar Animation */
-        .nav-links ul { display: flex; gap: 10px; list-style: none; position: relative; }
+        /* Tabbar Desktop Animation */
+        .nav-links ul { display: flex; gap: 5px; list-style: none; position: relative; }
         .nav-links a { 
             font-weight: 700; font-size: 13px; color: var(--gray); 
             text-transform: uppercase; padding: 10px 15px; position: relative;
-            z-index: 2; transition: var(--transition);
+            z-index: 2; transition: var(--transition); display: flex; align-items: center; gap: 8px;
         }
         .nav-links a:hover, .nav-links a.active { color: #fff; }
         
@@ -51,54 +51,64 @@
             box-shadow: 0 0 15px var(--primary); z-index: 1; opacity: 0;
         }
 
-        /* Search & User */
+        /* Search Box */
         .search-box {
             background: rgba(255,255,255,0.07); border-radius: 20px; padding: 8px 15px; 
-            display: flex; align-items: center; border: 1px solid var(--border); width: 220px; transition: 0.3s;
+            display: flex; align-items: center; border: 1px solid var(--border); width: 200px; transition: 0.3s;
         }
-        .search-box:focus-within { border-color: var(--primary); width: 280px; background: rgba(0,0,0,0.4); }
+        .search-box:focus-within { border-color: var(--primary); width: 260px; }
         .search-box input { background: none; border: none; color: white; padding-left: 10px; outline: none; font-size: 13px; width: 100%; }
 
-        .user-profile { 
-            display: flex; align-items: center; gap: 10px; 
-            background: rgba(255,255,255,0.08); padding: 5px 15px; 
-            border-radius: 25px; border: 1px solid var(--border); cursor: pointer; transition: 0.3s;
+        /* User Area */
+        .user-profile { display: flex; align-items: center; gap: 10px; background: rgba(255,255,255,0.08); padding: 5px 12px; border-radius: 25px; border: 1px solid var(--border); cursor: pointer; }
+        .avatar-img { width: 30px; height: 30px; border-radius: 50%; border: 2px solid var(--primary); object-fit: cover; }
+
+        /* --- MOBILE BOTTOM TABBAR --- */
+        .mobile-nav {
+            display: none; position: fixed; bottom: 0; left: 0; width: 100%;
+            background: var(--glass); backdrop-filter: blur(20px);
+            height: 65px; border-top: 1px solid var(--border);
+            z-index: 1001; justify-content: space-around; align-items: center;
         }
-        .avatar-img { width: 32px; height: 32px; border-radius: 50%; border: 2px solid var(--primary); object-fit: cover; }
-        .auth-btn { background: var(--primary); color: white; padding: 10px 20px; border-radius: 12px; font-weight: 800; border: none; cursor: pointer; font-size: 13px; }
+        .mobile-nav a { display: flex; flex-direction: column; align-items: center; color: var(--gray); font-size: 10px; font-weight: 700; gap: 4px; }
+        .mobile-nav a.active { color: var(--primary); }
+        .mobile-nav i { font-size: 20px; }
 
-        /* --- HERO RGB BANNER --- */
-        .hero-wrapper { position: relative; padding: 4px; border-radius: 24px; margin-top: 110px; background: linear-gradient(45deg, #ff4757, #7158e2, #00d2d3, #ff9f43, #ff4757); background-size: 400% 400%; animation: rgb-animation 8s linear infinite; }
+        /* --- HERO RGB --- */
+        .hero-wrapper { position: relative; padding: 4px; border-radius: 24px; margin-top: 100px; background: linear-gradient(45deg, #ff4757, #7158e2, #00d2d3, #ff4757); background-size: 400% 400%; animation: rgb-animation 8s linear infinite; }
         @keyframes rgb-animation { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
-        .hero { height: 480px; position: relative; display: flex; align-items: center; overflow: hidden; border-radius: 20px; background: #000; }
+        .hero { height: 450px; position: relative; display: flex; align-items: center; overflow: hidden; border-radius: 20px; background: #000; }
         .hero-bg { position: absolute; width: 100%; height: 100%; object-fit: cover; filter: brightness(0.4); transition: 0.8s; }
-        .hero-content { position: relative; z-index: 5; padding-left: 60px; max-width: 650px; }
-        .hero-nav { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(255,255,255,0.1); backdrop-filter: blur(10px); border: none; color: white; width: 45px; height: 45px; border-radius: 50%; cursor: pointer; z-index: 10; transition: 0.3s; display: flex; align-items: center; justify-content: center; }
-        .hero-nav:hover { background: var(--primary); transform: translateY(-50%) scale(1.1); }
-        .hero-nav.prev { left: 20px; }
-        .hero-nav.next { right: 20px; }
+        .hero-content { position: relative; z-index: 5; padding-left: 50px; max-width: 600px; }
+        .hero-content h1 { font-size: 36px; font-weight: 900; }
 
-        /* --- ANIME GRID & CARDS --- */
-        .section-title { margin: 50px 0 25px; font-size: 24px; font-weight: 900; border-left: 6px solid var(--primary); padding-left: 15px; text-transform: uppercase; }
-        .anime-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 30px; }
-        .anime-card { background: var(--card-bg); border-radius: 18px; overflow: hidden; border: 1px solid var(--border); transition: var(--transition); position: relative; }
-        .anime-card:hover { transform: translateY(-10px); border-color: var(--primary); box-shadow: 0 15px 40px rgba(0,0,0,0.6); }
-        .card-img { height: 310px; position: relative; overflow: hidden; }
-        .card-img img { width: 100%; height: 100%; object-fit: cover; transition: 0.5s; }
+        /* --- GRID & CARDS --- */
+        .section-title { margin: 40px 0 20px; font-size: 22px; font-weight: 800; border-left: 5px solid var(--primary); padding-left: 15px; text-transform: uppercase; }
+        .anime-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 25px; }
+        .anime-card { background: var(--card-bg); border-radius: 18px; overflow: hidden; border: 1px solid var(--border); transition: 0.3s; position: relative; }
+        .anime-card:hover { transform: translateY(-8px); border-color: var(--primary); box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+        .card-img { height: 280px; position: relative; overflow: hidden; }
+        .card-img img { width: 100%; height: 100%; object-fit: cover; }
         
-        /* Badges Realtime */
-        .badge-rating { position: absolute; top: 12px; left: 12px; background: #ffc107; color: #000; padding: 4px 10px; border-radius: 8px; font-size: 12px; font-weight: 800; display: flex; align-items: center; gap: 4px; z-index: 2; box-shadow: 0 4px 10px rgba(0,0,0,0.3); }
-        .badge-views { position: absolute; bottom: 12px; right: 12px; background: rgba(0, 0, 0, 0.7); color: #fff; padding: 4px 10px; border-radius: 8px; font-size: 11px; font-weight: 600; display: flex; align-items: center; gap: 5px; backdrop-filter: blur(5px); border: 1px solid rgba(255,255,255,0.1); }
+        .badge-rating { position: absolute; top: 12px; left: 12px; background: #ffc107; color: #000; padding: 4px 10px; border-radius: 8px; font-size: 11px; font-weight: 800; z-index: 2; }
+        .badge-views { position: absolute; bottom: 12px; right: 12px; background: rgba(0,0,0,0.7); color: #fff; padding: 4px 10px; border-radius: 8px; font-size: 10px; font-weight: 600; z-index: 2; backdrop-filter: blur(5px); }
 
         .card-info { padding: 15px; }
-        .card-info h3 { font-size: 15px; font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: #eee; }
+        .card-info h3 { font-size: 14px; font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 
-        /* --- FOOTER TỐI GIẢN --- */
-        .footer-simple { margin-top: 80px; padding: 40px 0; text-align: center; border-top: none; }
-        .footer-simple p { color: #555; font-size: 13px; letter-spacing: 1px; }
-        .footer-simple span { color: var(--primary); font-weight: 700; }
+        /* --- RESPONSIVE --- */
+        @media (max-width: 1024px) {
+            .nav-links, .search-box { display: none; }
+            .mobile-nav { display: flex; }
+            .navbar { height: 65px; }
+            .hero-wrapper { margin-top: 85px; }
+            .hero { height: 350px; }
+            .hero-content h1 { font-size: 26px; }
+            body { padding-bottom: 80px; }
+            .anime-grid { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 15px; }
+        }
 
-        @media (max-width: 1024px) { .nav-links, .search-box { display: none; } }
+        .footer-simple { padding: 40px 0; text-align: center; color: #444; font-size: 12px; }
     </style>
 </head>
 <body>
@@ -107,27 +117,35 @@
         <div class="container nav-content">
             <div class="logo" onclick="location.href='index.html'">KITO <span>ANIME</span></div>
             
-            <div class="nav-right-group">
+            <div class="nav-right-side">
                 <nav class="nav-links">
                     <ul id="tabList">
-                        <li><a href="index.html" class="tab-item active">Trang Chủ</a></li>
-                        <li><a href="#" class="tab-item">Lịch Chiếu</a></li>
-                        <li><a href="#" class="tab-item">Thể Loại</a></li>
+                        <li><a href="index.html" class="tab-item active"><i class="fa-solid fa-house"></i> Trang Chủ</a></li>
+                        <li><a href="#" class="tab-item"><i class="fa-solid fa-layer-group"></i> Thể Loại</a></li>
+                        <li><a href="#" class="tab-item"><i class="fa-solid fa-clock-rotate-left"></i> Lịch Sử</a></li>
+                        <li><a href="#" class="tab-item"><i class="fa-solid fa-calendar-days"></i> Lịch Chiếu</a></li>
                         <div id="underline"></div>
                     </ul>
                 </nav>
 
                 <div class="search-box">
-                    <i class="fa-solid fa-magnifying-glass" style="color:var(--gray)"></i>
-                    <input type="text" id="searchInput" placeholder="Tìm kiếm anime...">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <input type="text" placeholder="Tìm anime...">
                 </div>
 
                 <div id="userZone">
-                    <button class="auth-btn" onclick="location.href='auth.html'">ĐĂNG NHẬP</button>
+                    <button style="background:var(--primary); color:white; border:none; padding:8px 18px; border-radius:20px; font-weight:700; cursor:pointer;">LOGIN</button>
                 </div>
             </div>
         </div>
     </header>
+
+    <nav class="mobile-nav">
+        <a href="index.html" class="active"><i class="fa-solid fa-house"></i><span>Home</span></a>
+        <a href="#"><i class="fa-solid fa-magnifying-glass"></i><span>Tìm kiếm</span></a>
+        <a href="#"><i class="fa-solid fa-clock-rotate-left"></i><span>Lịch sử</span></a>
+        <a href="#"><i class="fa-solid fa-user"></i><span>Cá nhân</span></a>
+    </nav>
 
     <main class="container">
         <div class="hero-wrapper">
@@ -135,11 +153,9 @@
                 <img src="" class="hero-bg" id="heroImg">
                 <div class="hero-content">
                     <h1 id="heroTitle">Đang tải...</h1>
-                    <p id="heroDesc" style="color: #bbb; font-size: 14px; margin-top: 10px;"></p>
-                    <button class="auth-btn" id="heroBtn" style="padding: 18px 50px; margin-top: 25px;">XEM NGAY</button>
+                    <p id="heroDesc" style="color: #ccc; margin-top: 10px; font-size: 14px; max-width: 500px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;"></p>
+                    <button style="background:var(--primary); color:white; border:none; padding:12px 35px; border-radius:10px; font-weight:800; margin-top:20px; cursor:pointer;" id="heroBtn">XEM NGAY</button>
                 </div>
-                <button class="hero-nav prev" onclick="changeHero(-1)"><i class="fa-solid fa-chevron-left"></i></button>
-                <button class="hero-nav next" onclick="changeHero(1)"><i class="fa-solid fa-chevron-right"></i></button>
             </section>
         </div>
 
@@ -154,7 +170,7 @@
     </main>
 
     <footer class="footer-simple">
-        <p>Copyright © 2024 <span>KITO ANIME</span>. All rights reserved.</p>
+        <p>Copyright © 2024 KITO ANIME. All Rights Reserved.</p>
     </footer>
 
     <script type="module">
@@ -162,6 +178,7 @@
         import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
         import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
+        // Cấu hình Firebase của bạn
         const firebaseConfig = {
             apiKey: "AIzaSyBP9ZnwzQrrRY5JNy1DANm3boaWgvhoS_w",
             authDomain: "kito-anime-vn.firebaseapp.com",
@@ -192,10 +209,9 @@
             updateUnderline(document.querySelector('.tab-item.active'));
         });
 
-        // --- FIREBASE STATS (FIXED) ---
+        // --- FIREBASE STATS ---
         async function fetchStats(movieId, rId, vId) {
             try {
-                // Đảm bảo movieId là string để khớp với ID document trên Firebase
                 const docSnap = await getDoc(doc(db, "movie_stats", String(movieId)));
                 if (docSnap.exists()) {
                     const stats = docSnap.data();
@@ -204,7 +220,7 @@
                     if(rEl) rEl.innerHTML = `<i class="fa-solid fa-star"></i> ${stats.rating || '0.0'}`;
                     if(vEl) vEl.innerHTML = `<i class="fa-solid fa-eye"></i> ${stats.views || '0'}`;
                 }
-            } catch (e) { console.error("Stats Error:", e); }
+            } catch (e) {}
         }
 
         // --- RENDER LOGIC ---
@@ -214,20 +230,16 @@
             container.innerHTML = list.map(m => {
                 const rId = `r-${containerId}-${m.id}`;
                 const vId = `v-${containerId}-${m.id}`;
-                
-                // Gọi fetch stats ngay sau khi render
-                setTimeout(() => fetchStats(m.id, rId, vId), 200);
-
+                setTimeout(() => fetchStats(m.id, rId, vId), 300);
                 return `
                 <a href="watch.html?id=${m.id}" class="anime-card">
                     <div class="card-img">
-                        <img src="${m.image}">
+                        <img src="${m.image}" loading="lazy">
                         <div class="badge-rating" id="${rId}"><i class="fa-solid fa-star"></i> --</div>
                         <div class="badge-views" id="${vId}"><i class="fa-solid fa-eye"></i> --</div>
                     </div>
                     <div class="card-info"><h3>${m.title}</h3></div>
-                </a>
-                `;
+                </a>`;
             }).join('');
         }
 
@@ -235,14 +247,12 @@
             try {
                 const res = await fetch('./api.json');
                 const data = await res.json();
-
                 renderGrid(data.updated, 'newGrid');
                 renderGrid(data.comingSoon, 'comingGrid');
                 renderGrid(data.recommended, 'recGrid');
-
+                
                 heroList = data.updated.filter(m => m.image_banner).slice(0, 5);
                 if(heroList.length > 0) renderHero(0);
-
                 setTimeout(() => updateUnderline(document.querySelector('.tab-item.active')), 600);
             } catch (e) { console.error(e); }
         }
@@ -256,33 +266,29 @@
                 bg.src = m.image_banner;
                 bg.style.opacity = '1';
                 document.getElementById('heroTitle').innerText = m.title;
-                document.getElementById('heroDesc').innerText = m.description?.substring(0, 160) + "...";
+                document.getElementById('heroDesc').innerText = m.description || "";
                 document.getElementById('heroBtn').onclick = () => location.href = `watch.html?id=${m.id}`;
             }, 300);
         }
 
-        window.changeHero = (dir) => {
-            heroIndex = (heroIndex + dir + heroList.length) % heroList.length;
-            renderHero(heroIndex);
-        };
-
         // --- AUTH CHECK ---
         onAuthStateChanged(auth, (user) => {
             const userZone = document.getElementById('userZone');
-            if (user) {
+            if (user && userZone) {
                 const avatar = user.photoURL || `https://api.dicebear.com/7.x/avataaars/svg?seed=${user.email}`;
                 userZone.innerHTML = `
                     <div class="user-profile" id="logoutBtn">
                         <img src="${avatar}" class="avatar-img">
-                        <span style="font-weight:700; font-size:13px;">${user.email.split('@')[0]}</span>
-                    </div>
-                `;
+                    </div>`;
                 document.getElementById('logoutBtn').onclick = () => signOut(auth).then(() => location.reload());
             }
         });
 
         init();
-        setInterval(() => changeHero(1), 10000);
+        setInterval(() => {
+            heroIndex = (heroIndex + 1) % heroList.length;
+            renderHero(heroIndex);
+        }, 8000);
     </script>
 </body>
 </html>
