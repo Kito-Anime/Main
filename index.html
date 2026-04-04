@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KITO ANIME - Trang Chủ</title>
+    <title>KITO ANIME - Official</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
@@ -24,8 +24,7 @@
 
         /* --- ANIMATIONS --- */
         @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-        .reveal { opacity: 0; }
-        .reveal.active { animation: fadeInUp 0.6s ease forwards; }
+        .reveal { opacity: 0; animation: fadeInUp 0.6s ease forwards; }
 
         /* --- NAVBAR --- */
         .navbar { 
@@ -34,7 +33,7 @@
             border-bottom: 1px solid var(--border); backdrop-filter: blur(20px);
         }
         .nav-content { width: 100%; max-width: 1400px; margin: 0 auto; padding: 0 20px; display: flex; align-items: center; justify-content: space-between; }
-        .logo { font-size: 24px; font-weight: 900; text-transform: uppercase; cursor: pointer; display: flex; align-items: center; gap: 10px; }
+        .logo { font-size: 24px; font-weight: 900; text-transform: uppercase; cursor: pointer; display: flex; align-items: center; gap: 8px; }
         .logo span { color: var(--primary); }
 
         /* --- SEARCH UI --- */
@@ -42,35 +41,47 @@
             position: absolute; top: 70px; right: 0; width: 350px; 
             background: var(--card-bg); border: 1px solid var(--primary);
             border-radius: 12px; display: none; max-height: 400px; overflow-y: auto; z-index: 2000;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.8);
         }
         .search-results-box.active { display: block; }
-        .s-item { display: flex; gap: 12px; padding: 10px; border-bottom: 1px solid var(--border); text-decoration: none; color: white; transition: 0.2s; }
+        .s-item { display: flex; gap: 12px; padding: 10px; border-bottom: 1px solid var(--border); text-decoration: none; color: white; }
         .s-item:hover { background: rgba(255, 71, 87, 0.1); }
-        .s-item img { width: 45px; height: 65px; object-fit: cover; border-radius: 5px; }
+        .s-item img { width: 45px; height: 60px; object-fit: cover; border-radius: 4px; }
 
-        /* --- BANNER RGB --- */
+        /* --- BANNER RGB & ARROWS --- */
         .hero-wrapper { 
             position: relative; padding: 3px; border-radius: 25px; margin-top: 100px; 
             background: var(--rgb); background-size: 400% 400%; animation: rgb-flow 8s linear infinite;
         }
         @keyframes rgb-flow { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
         .hero { height: 450px; position: relative; overflow: hidden; border-radius: 22px; background: #000; display: flex; align-items: center; }
-        .hero-bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: brightness(0.4); }
-        .hero-content { position: relative; z-index: 5; padding: 40px; max-width: 600px; }
-        .h-description { color: #ccc; font-size: 14px; margin: 15px 0; line-height: 1.6; text-shadow: 1px 1px 3px #000; }
+        .hero-bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: brightness(0.4); transition: 0.5s; }
+        .hero-content { position: relative; z-index: 5; padding: 40px; max-width: 650px; }
+        .h-desc { color: #ccc; font-size: 14px; margin: 15px 0; line-height: 1.6; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+
+        .h-arrow {
+            position: absolute; top: 50%; transform: translateY(-50%); width: 45px; height: 45px;
+            border-radius: 50%; border: none; background: var(--rgb); background-size: 200%;
+            color: white; cursor: pointer; z-index: 10; display: flex; align-items: center; justify-content: center;
+            box-shadow: 0 0 15px var(--primary); transition: 0.3s;
+        }
+        .h-arrow:hover { transform: translateY(-50%) scale(1.1); }
 
         /* --- ANIME CARDS --- */
         .anime-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 20px; }
         .anime-card { background: var(--card-bg); border-radius: 12px; overflow: hidden; border: 1px solid var(--border); transition: 0.3s; text-decoration: none; color: white; }
         .anime-card:hover { transform: translateY(-8px); border-color: var(--primary); }
-        .card-img { width: 100%; aspect-ratio: 2 / 3; position: relative; overflow: hidden; background: #1a1a1e; }
+        .card-img { width: 100%; aspect-ratio: 2 / 3; position: relative; overflow: hidden; }
         .card-img img { width: 100%; height: 100%; object-fit: cover; }
-        .badge-rate { position: absolute; top: 8px; left: 8px; background: rgba(0,0,0,0.8); padding: 3px 8px; border-radius: 5px; font-size: 11px; color: #ffc107; font-weight: 800; display: flex; align-items: center; gap: 4px; }
+        
+        .badge-rate { position: absolute; top: 8px; left: 8px; background: rgba(0,0,0,0.8); padding: 3px 8px; border-radius: 5px; font-size: 11px; color: #ffc107; font-weight: 800; }
+        .badge-views { position: absolute; bottom: 8px; right: 8px; background: rgba(0,0,0,0.8); padding: 3px 8px; border-radius: 5px; font-size: 10px; color: #fff; }
 
+        /* --- MOBILE UI --- */
         @media (max-width: 1024px) {
             .nav-right-side { display: none; }
             .nav-content { justify-content: center; }
+            .hero { height: 350px; }
             .mobile-nav { display: flex; position: fixed; bottom: 0; width: 100%; height: 65px; background: var(--glass); z-index: 1000; justify-content: space-around; align-items: center; border-top: 1px solid var(--border); backdrop-filter: blur(20px); }
             .mobile-nav a { display: flex; flex-direction: column; align-items: center; font-size: 10px; color: var(--gray); text-decoration: none; }
             .mobile-nav a.active { color: var(--primary); }
@@ -82,21 +93,21 @@
 <body>
 
     <div id="mobileSearchTop">
-        <input type="text" id="mSearchInput" placeholder="Tìm tên anime..." style="flex:1; padding:12px; border-radius:25px; border:none; background:#1a1a1e; color:white; outline:none">
+        <input type="text" id="mSearchInput" placeholder="Tìm kiếm anime..." style="flex:1; padding:12px; border-radius:25px; border:none; background:#1a1a1e; color:white; outline:none">
         <i class="fa-solid fa-xmark" style="margin-left:15px; color:var(--primary); font-size:22px" onclick="toggleSearch(false)"></i>
         <div id="mSearchRes" class="search-results-box" style="left:5%; width:90%; top:80px"></div>
     </div>
 
     <header class="navbar">
         <div class="nav-content">
-            <div class="logo reveal" onclick="location.href='index.html'">
+            <div class="logo" onclick="location.href='index.html'">
                 <i class="fa-solid fa-angles-right" style="color:var(--primary)"></i>
                 KITO <span>ANIME</span>
                 <i class="fa-solid fa-angles-left" style="color:var(--primary)"></i>
             </div>
             
-            <div class="nav-right-side reveal" style="position:relative">
-                <input type="text" id="pcSearch" placeholder="Tìm kiếm anime..." style="background:#1a1a1e; border:1px solid var(--border); color:white; border-radius:20px; padding:7px 20px; outline:none; width:250px">
+            <div class="nav-right-side" style="position:relative; display: flex; align-items: center;">
+                <input type="text" id="pcSearch" placeholder="Tìm kiếm..." style="background:#1a1a1e; border:1px solid var(--border); color:white; border-radius:20px; padding:7px 20px; outline:none; width:220px">
                 <div id="pcSearchRes" class="search-results-box"></div>
                 <div id="userPC" style="margin-left:20px"></div>
             </div>
@@ -107,11 +118,13 @@
         <div class="hero-wrapper reveal">
             <section class="hero">
                 <div id="hBg" class="hero-bg"></div>
+                <button class="h-arrow" style="left: 20px;" onclick="changeHero(-1)"><i class="fa-solid fa-chevron-left"></i></button>
                 <div class="hero-content">
                     <h1 id="hTitle" style="font-size: 32px; font-weight: 900;">...</h1>
-                    <p id="hDesc" class="h-description">...</p>
+                    <p id="hDesc" class="h-desc">...</p>
                     <button id="hBtn" style="background:var(--primary); color:white; border:none; padding:12px 30px; border-radius:10px; cursor:pointer; font-weight:800">XEM NGAY</button>
                 </div>
+                <button class="h-arrow" style="right: 20px;" onclick="changeHero(1)"><i class="fa-solid fa-chevron-right"></i></button>
             </section>
         </div>
 
@@ -123,15 +136,16 @@
     </main>
 
     <nav class="mobile-nav">
-        <a href="index.html" class="active"><i class="fa-solid fa-house"></i><span>Home</span></a>
+        <a href="index.html" class="active"><i class="fa-solid fa-house"></i><span>Trang chủ</span></a>
         <a href="javascript:void(0)" onclick="toggleSearch(true)"><i class="fa-solid fa-magnifying-glass"></i><span>Tìm kiếm</span></a>
+        <a href="#"><i class="fa-solid fa-clock-rotate-left"></i><span>Lịch sử</span></a>
         <a href="javascript:void(0)" id="mobileUser"><i class="fa-solid fa-user"></i><span>Cá nhân</span></a>
     </nav>
 
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
         import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
-        import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+        import { getFirestore, doc, onSnapshot } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
         const firebaseConfig = { apiKey: "AIzaSyBP9ZnwzQrrRY5JNy1DANm3boaWgvhoS_w", authDomain: "kito-anime-vn.firebaseapp.com", projectId: "kito-anime-vn", storageBucket: "kito-anime-vn.firebasestorage.app", appId: "1:287480619398:web:f40d137345407f27874c07" };
         const app = initializeApp(firebaseConfig);
@@ -139,95 +153,100 @@
         const db = getFirestore(app);
 
         let allMovies = [];
+        let heroMovies = [];
+        let heroIdx = 0;
 
-        // --- FIX LỖI SỐ SAO (FIRESTORE) ---
-        async function loadRating(movieId) {
-            try {
-                const docRef = doc(db, "movie_stats", String(movieId));
-                const snap = await getDoc(docRef);
-                const rateEl = document.getElementById(`rate-${movieId}`);
-                if (rateEl && snap.exists()) {
+        // --- FIX LỖI SỐ SAO & LƯỢT XEM (FIRESTORE REALTIME) ---
+        function syncStats(movieId) {
+            const docRef = doc(db, "movie_stats", String(movieId));
+            onSnapshot(docRef, (snap) => {
+                if (snap.exists()) {
                     const data = snap.data();
-                    const score = data.rateCount > 0 ? (data.rating / data.rateCount).toFixed(1) : "10.0";
-                    rateEl.innerText = score;
+                    const rate = data.rateCount > 0 ? (data.rating / data.rateCount).toFixed(1) : "10.0";
+                    const views = data.views || 0;
+                    
+                    const rEl = document.getElementById(`r-${movieId}`);
+                    const vEl = document.getElementById(`v-${movieId}`);
+                    if (rEl) rEl.innerText = rate;
+                    if (vEl) vEl.innerText = views.toLocaleString();
                 }
-            } catch (e) { console.error("Rating Error:", e); }
+            });
         }
 
-        // --- RENDER LOGIC ---
-        function renderMovies(list, targetId) {
+        // --- RENDER ---
+        function render(list, targetId) {
             const grid = document.getElementById(targetId);
             grid.innerHTML = list.map(m => `
-                <a href="watch.html?id=${m.id}" class="anime-card">
+                <a href="watch.html?id=${m.id}" class="anime-card reveal">
                     <div class="card-img">
                         <img src="${m.image}" loading="lazy">
-                        <div class="badge-rate"><i class="fa-solid fa-star"></i> <span id="rate-${m.id}">10.0</span></div>
+                        <div class="badge-rate"><i class="fa-solid fa-star"></i> <span id="r-${m.id}">10.0</span></div>
+                        <div class="badge-views"><i class="fa-solid fa-eye"></i> <span id="v-${m.id}">0</span></div>
                     </div>
                     <div style="padding:10px"><h3 style="font-size:12px; font-weight:700; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">${m.title}</h3></div>
                 </a>
             `).join('');
-            // Sau khi render HTML xong, mới bắt đầu đi lấy sao từ Firestore
-            list.forEach(m => loadRating(m.id));
+            list.forEach(m => syncStats(m.id));
         }
 
-        // --- SEARCH ENGINE ---
-        function initSearch(inputId, resBoxId) {
+        // --- SEARCH ---
+        function setupSearch(inputId, resId) {
             const input = document.getElementById(inputId);
-            const resBox = document.getElementById(resBoxId);
-            input.addEventListener('input', (e) => {
+            const res = document.getElementById(resId);
+            input.oninput = (e) => {
                 const val = e.target.value.toLowerCase().trim();
-                if (!val) { resBox.classList.remove('active'); return; }
-                const results = allMovies.filter(m => m.title.toLowerCase().includes(val)).slice(0, 6);
-                resBox.classList.add('active');
-                resBox.innerHTML = results.length ? results.map(m => `
+                if (!val) { res.classList.remove('active'); return; }
+                const filtered = allMovies.filter(m => m.title.toLowerCase().includes(val)).slice(0, 6);
+                res.classList.add('active');
+                res.innerHTML = filtered.length ? filtered.map(m => `
                     <a href="watch.html?id=${m.id}" class="s-item">
                         <img src="${m.image}">
                         <div><div style="font-weight:700; font-size:13px">${m.title}</div><div style="font-size:11px; color:var(--gray)">Xem ngay</div></div>
-                    </a>`).join('') : '<p style="padding:15px; color:var(--gray)">Không tìm thấy phim...</p>';
-            });
+                    </a>`).join('') : '<p style="padding:15px; color:var(--gray)">Không thấy phim...</p>';
+            };
         }
 
-        window.toggleSearch = (show) => {
-            document.getElementById('mobileSearchTop').classList.toggle('active', show);
-            if (!show) document.getElementById('mSearchRes').classList.remove('active');
-        };
+        window.toggleSearch = (s) => document.getElementById('mobileSearchTop').classList.toggle('active', s);
 
-        // --- INITIALIZE ---
-        async function start() {
+        // --- BANNER ---
+        window.changeHero = (dir) => {
+            heroIdx = (heroIdx + dir + heroMovies.length) % heroMovies.length;
+            const m = heroMovies[heroIdx];
+            document.getElementById('hBg').style.backgroundImage = `url(${m.image_banner})`;
+            document.getElementById('hBg').style.backgroundSize = "cover";
+            document.getElementById('hTitle').innerText = m.title;
+            document.getElementById('hDesc').innerText = m.description || "Khám phá anime hay nhất tại Kito Anime.";
+            document.getElementById('hBtn').onclick = () => location.href = `watch.html?id=${m.id}`;
+        }
+
+        // --- INIT ---
+        async function init() {
             const res = await fetch('./api.json');
             const data = await res.json();
-            allMovies = [...data.updated, ...data.recommended, ...data.comingSoon];
+            allMovies = [...data.updated, ...data.recommended];
+            heroMovies = data.updated.slice(0, 5);
             
-            renderMovies(data.updated, 'gridUpdate');
-            renderMovies(data.recommended, 'gridRec');
+            render(data.updated, 'gridUpdate');
+            render(data.recommended, 'gridRec');
+            changeHero(0);
 
-            // Banner Setup
-            const top = data.updated[0];
-            document.getElementById('hBg').style.backgroundImage = `url(${top.image_banner})`;
-            document.getElementById('hBg').style.backgroundSize = "cover";
-            document.getElementById('hTitle').innerText = top.title;
-            document.getElementById('hDesc').innerText = top.description || "Khám phá những bộ anime mới nhất tại Kito Anime.";
-            document.getElementById('hBtn').onclick = () => location.href = `watch.html?id=${top.id}`;
-
-            initSearch('pcSearch', 'pcSearchRes');
-            initSearch('mSearchInput', 'mSearchRes');
-
-            document.querySelectorAll('.reveal').forEach(el => el.classList.add('active'));
+            setupSearch('pcSearch', 'pcSearchRes');
+            setupSearch('mSearchInput', 'mSearchRes');
         }
 
-        onAuthStateChanged(auth, (user) => {
-            const pcZone = document.getElementById('userPC');
-            const mobileBtn = document.getElementById('mobileUser');
-            if (user) {
-                pcZone.innerHTML = `<img src="${user.photoURL || 'https://api.dicebear.com/7.x/avataaars/svg?seed='+user.email}" style="width:35px; height:35px; border-radius:50%; border:2px solid var(--primary); cursor:pointer">`;
-                mobileBtn.onclick = () => alert("Đã đăng nhập: " + user.email);
+        onAuthStateChanged(auth, (u) => {
+            const pc = document.getElementById('userPC');
+            const mb = document.getElementById('mobileUser');
+            if (u) {
+                pc.innerHTML = `<img src="${u.photoURL || 'https://api.dicebear.com/7.x/avataaars/svg?seed='+u.email}" style="width:35px; height:35px; border-radius:50%; border:2px solid var(--primary); cursor:pointer">`;
+                mb.onclick = () => location.href = "profile.html";
             } else {
-                pcZone.innerHTML = `<button onclick="location.href='auth.html'" style="background:var(--primary); color:white; border:none; padding:7px 15px; border-radius:20px; cursor:pointer; font-weight:800">LOGIN</button>`;
-                mobileBtn.onclick = () => location.href = 'auth.html';
+                pc.innerHTML = `<button onclick="location.href='auth.html'" style="background:var(--primary); color:white; border:none; padding:7px 15px; border-radius:20px; cursor:pointer; font-weight:800">LOGIN</button>`;
+                mb.onclick = () => location.href = 'auth.html';
             }
         });
 
-        start();
+        init();
     </script>
 </body>
 </html>
