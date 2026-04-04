@@ -21,74 +21,77 @@
 
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
         body { background-color: var(--dark); color: var(--text); overflow-x: hidden; padding-bottom: 100px; }
-        a { text-decoration: none !important; color: inherit; }
-
+        
         /* --- NAVBAR --- */
         .navbar { 
             background: var(--glass); height: 80px; display: flex; 
             align-items: center; position: fixed; top: 0; width: 100%; z-index: 1000; 
             border-bottom: 1px solid var(--border); backdrop-filter: blur(20px);
         }
-        .nav-content { width: 100%; max-width: 1400px; margin: 0 auto; padding: 0 20px; display: flex; align-items: center; justify-content: space-between; gap: 30px; }
+        .nav-content { width: 100%; max-width: 1400px; margin: 0 auto; padding: 0 20px; display: flex; align-items: center; justify-content: space-between; position: relative; }
         
-        .logo { font-size: 24px; font-weight: 900; text-transform: uppercase; cursor: pointer; display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
+        /* Logo Styling */
+        .logo { font-size: 24px; font-weight: 900; text-transform: uppercase; cursor: pointer; display: flex; align-items: center; gap: 10px; }
         .logo span { color: var(--primary); }
         .logo-arrow { color: var(--primary); font-size: 18px; animation: pulse 1.5s infinite; text-shadow: 0 0 10px var(--primary); }
         @keyframes pulse { 0%, 100% { opacity: 0.4; transform: scale(0.9); } 50% { opacity: 1; transform: scale(1.1); } }
 
-        .nav-right-side { display: flex; align-items: center; gap: 20px; flex-grow: 1; justify-content: flex-end; }
-        
         /* Search Desktop */
-        .search-wrapper { position: relative; width: 250px; }
-        .search-box { background: rgba(255,255,255,0.07); border-radius: 20px; padding: 8px 15px; display: flex; align-items: center; border: 1px solid var(--border); transition: 0.3s; }
-        .search-box:focus-within { border-color: var(--primary); width: 300px; background: rgba(255,255,255,0.12); }
-        .search-box input { background: none; border: none; color: white; padding-left: 10px; outline: none; font-size: 13px; width: 100%; }
+        .pc-search-box { background: #1a1a1e; border: 1px solid var(--border); color: white; border-radius: 20px; padding: 6px 15px; outline: none; width: 200px; transition: 0.3s; }
+        .pc-search-box:focus { border-color: var(--primary); width: 250px; }
 
-        .search-results { position: absolute; top: 50px; right: 0; width: 350px; background: var(--card-bg); border-radius: 15px; border: 1px solid var(--border); display: none; max-height: 400px; overflow-y: auto; z-index: 100; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
-        .search-results.active { display: block; }
+        /* Mobile Search Overlay */
+        #mobileSearchOverlay {
+            position: fixed; top: -100px; left: 0; width: 100%; height: 80px;
+            background: var(--dark); z-index: 2000; display: flex; align-items: center;
+            justify-content: center; padding: 0 20px; transition: 0.4s; border-bottom: 1px solid var(--primary);
+        }
+        #mobileSearchOverlay.active { top: 0; }
+        .m-search-box { width: 100%; max-width: 500px; position: relative; display: flex; align-items: center; }
+        .m-search-box input { width: 100%; padding: 12px 45px 12px 20px; border-radius: 25px; border: 1px solid var(--border); background: #1a1a1e; color: white; outline: none; }
+        .m-search-box i.close-search { position: absolute; right: 15px; color: var(--primary); font-size: 20px; cursor: pointer; }
 
-        .nav-links ul { display: flex; list-style: none; position: relative; }
-        .nav-links a { font-weight: 700; font-size: 13px; color: var(--gray); text-transform: uppercase; padding: 10px 15px; transition: 0.3s; white-space: nowrap; }
-        .nav-links a:hover { color: white; }
-        #underline { position: absolute; bottom: 0; height: 3px; background: var(--primary); border-radius: 10px; transition: var(--transition); opacity: 0; }
-
-        /* --- HERO --- */
-        .hero-wrapper { position: relative; padding: 3px; border-radius: 25px; margin-top: 100px; background: linear-gradient(45deg, #ff4757, #7158e2, #00d2d3, #ff4757); background-size: 400% 400%; animation: rgb-flow 8s linear infinite; }
-        @keyframes rgb-flow { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
-        .hero { height: 450px; position: relative; overflow: hidden; border-radius: 22px; background: #000; display: flex; align-items: center; }
-        .hero-bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: brightness(0.4); opacity: 0; transition: 1s; }
-        .hero-bg.active { opacity: 1; }
-        .hero-content { position: relative; z-index: 10; padding: 0 60px; max-width: 700px; opacity: 0; transform: translateX(-30px); transition: 0.8s; }
-        .hero-content.active { opacity: 1; transform: translateX(0); }
-
-        /* --- GRID --- */
-        .section-title { font-size: 22px; font-weight: 900; border-left: 5px solid var(--primary); padding-left: 15px; margin: 40px 0 20px; text-transform: uppercase; }
-        .anime-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 20px; }
-        .anime-card { background: var(--card-bg); border-radius: 15px; overflow: hidden; border: 1px solid var(--border); transition: 0.3s; position: relative; }
+        /* --- CARDS & STATS --- */
+        .section-title { font-size: 20px; font-weight: 900; margin: 40px 0 20px; border-left: 4px solid var(--primary); padding-left: 15px; text-transform: uppercase; }
+        .anime-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 20px; }
+        .anime-card { background: var(--card-bg); border-radius: 15px; overflow: hidden; border: 1px solid var(--border); transition: 0.3s; position: relative; display: block; }
         .anime-card:hover { transform: translateY(-8px); border-color: var(--primary); }
         .card-img { height: 260px; position: relative; overflow: hidden; }
         .card-img img { width: 100%; height: 100%; object-fit: cover; }
-        .badge-rate { position: absolute; top: 10px; left: 10px; background: rgba(0,0,0,0.7); padding: 4px 8px; border-radius: 6px; font-size: 11px; font-weight: 800; color: #ffc107; backdrop-filter: blur(4px); }
+        .badge-rate { position: absolute; top: 10px; left: 10px; background: rgba(0,0,0,0.8); padding: 4px 8px; border-radius: 6px; font-size: 11px; font-weight: 800; color: #ffc107; backdrop-filter: blur(4px); }
+        .badge-views { position: absolute; bottom: 10px; right: 10px; background: rgba(0,0,0,0.8); padding: 4px 8px; border-radius: 6px; font-size: 10px; color: #fff; backdrop-filter: blur(4px); }
 
-        /* --- PROFILE OVERLAY --- */
-        .user-modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.85); backdrop-filter: blur(10px); display: none; align-items: center; justify-content: center; z-index: 9999; }
+        /* --- PROFILE MODAL --- */
+        .user-modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.95); backdrop-filter: blur(10px); display: none; align-items: center; justify-content: center; z-index: 9999; }
         .user-modal-overlay.active { display: flex; }
-        .profile-card { background: var(--card-bg); width: 90%; max-width: 350px; padding: 40px 30px; border-radius: 30px; border: 1px solid var(--border); text-align: center; position: relative; }
-        .profile-avatar { width: 100px; height: 100px; border-radius: 50%; border: 4px solid var(--primary); margin-bottom: 20px; }
+        .profile-card { background: var(--card-bg); width: 320px; padding: 40px 20px; border-radius: 30px; border: 1px solid var(--border); text-align: center; position: relative; }
+        .profile-avatar { width: 90px; height: 90px; border-radius: 50%; border: 3px solid var(--primary); margin-bottom: 15px; object-fit: cover; }
 
-        /* --- MOBILE --- */
+        /* --- MOBILE RESPONSIVE --- */
         @media (max-width: 1024px) {
-            .nav-links, .search-wrapper { display: none; }
-            .nav-content { justify-content: center; }
+            .nav-right-side { display: none; } /* Ẩn login/avatar/search trên header mobile */
+            .nav-content { justify-content: center; } /* Đưa logo ra giữa */
+            .logo { font-size: 22px; }
             .hero { height: 320px; }
-            .hero-content { padding: 0 30px; }
+            .anime-grid { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 12px; }
             .mobile-nav { display: flex; position: fixed; bottom: 0; width: 100%; height: 65px; background: var(--glass); backdrop-filter: blur(20px); border-top: 1px solid var(--border); z-index: 1000; justify-content: space-around; align-items: center; }
-            .mobile-nav a { display: flex; flex-direction: column; align-items: center; font-size: 10px; color: var(--gray); font-weight: 700; gap: 4px; }
+            .mobile-nav a { display: flex; flex-direction: column; align-items: center; font-size: 10px; color: var(--gray); font-weight: 700; gap: 4px; text-decoration: none; }
             .mobile-nav a.active { color: var(--primary); }
+        }
+
+        @media (min-width: 1025px) {
+            .mobile-nav { display: none; }
         }
     </style>
 </head>
 <body>
+
+    <div id="mobileSearchOverlay">
+        <div class="m-search-box">
+            <input type="text" id="mSearchInput" placeholder="Tìm tên phim...">
+            <i class="fa-solid fa-circle-xmark close-search" onclick="toggleSearch(false)"></i>
+        </div>
+    </div>
 
     <header class="navbar">
         <div class="nav-content">
@@ -99,32 +102,15 @@
             </div>
             
             <div class="nav-right-side">
-                <div class="search-wrapper">
-                    <div class="search-box">
-                        <i class="fa-solid fa-magnifying-glass" style="color:var(--gray)"></i>
-                        <input type="text" id="searchInput" placeholder="Tìm kiếm phim...">
-                    </div>
-                    <div class="search-results" id="searchRes"></div>
-                </div>
-
-                <nav class="nav-links">
-                    <ul id="tabList">
-                        <li><a href="index.html" class="active">Trang Chủ</a></li>
-                        <li><a href="#">Thể Loại</a></li>
-                        <li><a href="#">Lịch Sử</a></li>
-                        <div id="underline"></div>
-                    </ul>
-                </nav>
-                <div id="userZone">
-                    <button onclick="location.href='auth.html'" style="background:var(--primary); color:white; border:none; padding:8px 18px; border-radius:20px; font-weight:800; cursor:pointer; font-size:12px;">ĐĂNG NHẬP</button>
-                </div>
+                <input type="text" class="pc-search-box" placeholder="Tìm kiếm...">
+                <div id="userZoneDesktop"></div>
             </div>
         </div>
     </header>
 
     <nav class="mobile-nav">
         <a href="index.html" class="active"><i class="fa-solid fa-house"></i><span>Home</span></a>
-        <a href="javascript:void(0)" onclick="openMobileSearch()"><i class="fa-solid fa-magnifying-glass"></i><span>Tìm kiếm</span></a>
+        <a href="javascript:void(0)" onclick="toggleSearch(true)"><i class="fa-solid fa-magnifying-glass"></i><span>Tìm kiếm</span></a>
         <a href="#"><i class="fa-solid fa-clock-rotate-left"></i><span>Lịch sử</span></a>
         <a href="javascript:void(0)" id="mobileUserBtn"><i class="fa-solid fa-user"></i><span>Cá nhân</span></a>
     </nav>
@@ -133,22 +119,19 @@
         <div class="profile-card">
             <span onclick="closeProfile()" style="position:absolute; top:15px; right:20px; cursor:pointer; font-size:24px; color:var(--gray)">&times;</span>
             <img src="" id="mAvatar" class="profile-avatar">
-            <h2 id="mName" style="margin-bottom:5px">Người dùng Kito</h2>
-            <p id="mEmail" style="color:var(--gray); font-size:13px; margin-bottom:25px"></p>
-            <button id="btnLogout" style="width:100%; background:var(--primary); color:white; border:none; padding:12px; border-radius:12px; font-weight:800; cursor:pointer;">ĐĂNG XUẤT</button>
+            <h2 id="mName" style="color:white">...</h2>
+            <p id="mEmail" style="color:var(--gray); font-size:12px; margin-bottom:25px"></p>
+            <button id="btnLogout" style="width:100%; background:var(--primary); color:white; border:none; padding:12px; border-radius:15px; font-weight:800; cursor:pointer;">ĐĂNG XUẤT</button>
         </div>
     </div>
 
-    <main style="max-width:1400px; margin:0 auto; padding:0 20px;">
-        <div class="hero-wrapper">
-            <section class="hero">
-                <div id="heroBg"></div>
-                <div class="hero-content" id="heroText">
-                    <h1 id="hTitle">KITO ANIME</h1>
-                    <p id="hDesc" style="color:#bdc3c7; font-size:14px; margin-bottom:20px;"></p>
-                    <button id="hBtn" style="background:var(--primary); color:white; border:none; padding:10px 25px; border-radius:8px; font-weight:800; cursor:pointer;">XEM NGAY</button>
-                </div>
-            </section>
+    <main style="max-width:1400px; margin:80px auto 0; padding:20px;">
+        <div style="background:#000; border-radius:20px; height:350px; position:relative; overflow:hidden; margin-bottom:30px; border:1px solid var(--border)">
+            <div id="heroBg" style="position:absolute; inset:0; opacity:0.5"></div>
+            <div style="position:relative; z-index:10; padding:40px; height:100%; display:flex; flex-direction:column; justify-content:center;">
+                <h1 id="hTitle" style="font-size:32px; font-weight:900;">...</h1>
+                <button id="hBtn" style="margin-top:20px; width:fit-content; background:var(--primary); color:white; border:none; padding:12px 30px; border-radius:10px; font-weight:800; cursor:pointer">XEM NGAY</button>
+            </div>
         </div>
 
         <h2 class="section-title">Sắp phát hành</h2>
@@ -157,7 +140,7 @@
         <h2 class="section-title">Mới cập nhật</h2>
         <div class="anime-grid" id="updateGrid"></div>
 
-        <h2 class="section-title">Đề xuất cho bạn</h2>
+        <h2 class="section-title">Đề xuất</h2>
         <div class="anime-grid" id="recGrid"></div>
     </main>
 
@@ -171,20 +154,30 @@
         const auth = getAuth(app);
         const db = getFirestore(app);
 
-        let allData = [];
+        // --- MOBILE SEARCH ---
+        window.toggleSearch = (show) => {
+            const overlay = document.getElementById('mobileSearchOverlay');
+            overlay.classList.toggle('active', show);
+            if(show) document.getElementById('mSearchInput').focus();
+        };
 
-        // --- AUTH & PROFILE ---
+        // --- AUTH LOGIC ---
         onAuthStateChanged(auth, (user) => {
-            const userZone = document.getElementById('userZone');
+            const userZonePC = document.getElementById('userZoneDesktop');
             const mobileBtn = document.getElementById('mobileUserBtn');
+            
             if (user) {
-                const avatar = user.photoURL || `https://api.dicebear.com/7.x/avataaars/svg?seed=${user.email}`;
-                userZone.innerHTML = `<img src="${avatar}" onclick="openProfile()" style="width:38px; height:38px; border-radius:50%; border:2px solid var(--primary); cursor:pointer;">`;
-                document.getElementById('mAvatar').src = avatar;
+                const ava = user.photoURL || `https://api.dicebear.com/7.x/avataaars/svg?seed=${user.email}`;
+                // Desktop UI
+                userZonePC.innerHTML = `<img src="${ava}" onclick="openProfile()" style="width:38px; height:38px; border-radius:50%; border:2px solid var(--primary); cursor:pointer; object-fit:cover;">`;
+                // Modal Data
+                document.getElementById('mAvatar').src = ava;
                 document.getElementById('mName').innerText = user.displayName || "Thành viên Kito";
                 document.getElementById('mEmail').innerText = user.email;
+                // Mobile Click
                 mobileBtn.onclick = () => openProfile();
             } else {
+                userZonePC.innerHTML = `<button onclick="location.href='auth.html'" style="background:var(--primary); color:white; border:none; padding:8px 18px; border-radius:20px; font-weight:800; cursor:pointer">LOGIN</button>`;
                 mobileBtn.onclick = () => location.href = 'auth.html';
             }
         });
@@ -193,57 +186,55 @@
         window.closeProfile = () => document.getElementById('profileModal').classList.remove('active');
         document.getElementById('btnLogout').onclick = () => signOut(auth).then(() => location.reload());
 
-        // --- TÌM KIẾM ---
-        document.getElementById('searchInput').oninput = (e) => {
-            const val = e.target.value.toLowerCase();
-            const resBox = document.getElementById('searchRes');
-            if(val.length < 1) { resBox.classList.remove('active'); return; }
-            
-            const filtered = allData.filter(m => m.title.toLowerCase().includes(val)).slice(0, 5);
-            if(filtered.length > 0) {
-                resBox.classList.add('active');
-                resBox.innerHTML = filtered.map(m => `
-                    <a href="watch.html?id=${m.id}" style="display:flex; gap:10px; padding:10px; border-bottom:1px solid var(--border)">
-                        <img src="${m.image}" style="width:50px; height:70px; object-fit:cover; border-radius:5px">
-                        <div><h4 style="font-size:14px">${m.title}</h4><p style="font-size:11px; color:var(--gray)">Xem ngay</p></div>
-                    </a>`).join('');
-            } else { resBox.classList.remove('active'); }
-        };
+        // --- REALTIME FIRESTORE STATS ---
+        async function getStats(id) {
+            try {
+                const snap = await getDoc(doc(db, "movie_stats", String(id)));
+                if(snap.exists()) {
+                    const data = snap.data();
+                    const rating = data.rateCount > 0 ? (data.rating / data.rateCount).toFixed(1) : "0.0";
+                    const views = data.views || 0;
+                    if(document.getElementById(`rate-${id}`)) document.getElementById(`rate-${id}`).innerText = rating;
+                    if(document.getElementById(`view-${id}`)) document.getElementById(`view-${id}`).innerText = views;
+                }
+            } catch(e) { console.error(e); }
+        }
 
-        // --- LOAD DATA ---
-        async function load() {
+        // --- RENDER & LOAD ---
+        async function init() {
             const res = await fetch('./api.json');
             const data = await res.json();
-            allData = [...data.updated, ...data.comingSoon, ...data.recommended];
             
-            render(data.comingSoon, 'comingGrid');
-            render(data.updated, 'updateGrid');
-            render(data.recommended, 'recGrid');
-            updateHero(data.updated[0]);
+            renderList(data.comingSoon, 'comingGrid');
+            renderList(data.updated, 'updateGrid');
+            renderList(data.recommended, 'recGrid');
+
+            // Hero setup
+            const first = data.updated[0];
+            document.getElementById('hTitle').innerText = first.title;
+            document.getElementById('heroBg').style.backgroundImage = `url(${first.image_banner})`;
+            document.getElementById('heroBg').style.backgroundSize = "cover";
+            document.getElementById('hBtn').onclick = () => location.href = `watch.html?id=${first.id}`;
         }
 
-        function render(list, id) {
-            document.getElementById(id).innerHTML = list.map(m => `
+        function renderList(list, gridId) {
+            document.getElementById(gridId).innerHTML = list.map(m => {
+                getStats(m.id); // Gọi lấy data từ Firebase
+                return `
                 <a href="watch.html?id=${m.id}" class="anime-card">
                     <div class="card-img">
-                        <img src="${m.image}" loading="lazy">
-                        <div class="badge-rate"><i class="fa-solid fa-star"></i> 10.0</div>
+                        <img src="${m.image}" alt="${m.title}" loading="lazy">
+                        <div class="badge-rate"><i class="fa-solid fa-star"></i> <span id="rate-${m.id}">--</span></div>
+                        <div class="badge-views"><i class="fa-solid fa-eye"></i> <span id="view-${m.id}">--</span></div>
                     </div>
-                    <div style="padding:12px"><h3 style="font-size:13px; font-weight:700; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">${m.title}</h3></div>
-                </a>`).join('');
+                    <div style="padding:12px">
+                        <h3 style="font-size:13px; font-weight:700; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">${m.title}</h3>
+                    </div>
+                </a>`;
+            }).join('');
         }
 
-        function updateHero(m) {
-            if(!m) return;
-            document.getElementById('heroBg').innerHTML = `<img src="${m.image_banner}" class="hero-bg active">`;
-            document.getElementById('hTitle').innerText = m.title;
-            document.getElementById('hDesc').innerText = m.description || "";
-            document.getElementById('hBtn').onclick = () => location.href = `watch.html?id=${m.id}`;
-            const txt = document.getElementById('heroText');
-            txt.classList.add('active');
-        }
-
-        load();
+        init();
     </script>
 </body>
 </html>
