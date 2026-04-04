@@ -23,55 +23,64 @@
         body { background-color: var(--dark); color: var(--text); overflow-x: hidden; line-height: 1.6; padding-bottom: 80px; }
         a { text-decoration: none !important; color: inherit; }
 
-        /* --- NAVBAR ĐỒNG BỘ INDEX --- */
+        /* --- NAVBAR FIX (ĐỒNG BỘ INDEX) --- */
         .navbar { 
             background: var(--glass); height: 80px; display: flex; 
             align-items: center; position: fixed; top: 0; width: 100%; z-index: 1000; 
             border-bottom: 1px solid var(--border); backdrop-filter: blur(20px);
         }
         .nav-content { width: 100%; max-width: 1400px; margin: 0 auto; padding: 0 20px; display: flex; align-items: center; justify-content: space-between; }
-        .logo { font-size: 24px; font-weight: 900; text-transform: uppercase; cursor: pointer; }
+        .logo { font-size: 24px; font-weight: 900; text-transform: uppercase; cursor: pointer; min-width: 150px; }
         .logo span { color: var(--primary); }
+        
         .nav-right-side { display: flex; align-items: center; gap: 20px; flex-grow: 1; justify-content: flex-end; }
-        .nav-links ul { display: flex; gap: 5px; list-style: none; position: relative; }
+        
+        /* Tabbar Logic Fix */
+        .nav-links ul { display: flex; gap: 5px; list-style: none; position: relative; padding: 10px 0; }
         .nav-links a { font-weight: 700; font-size: 13px; color: var(--gray); text-transform: uppercase; padding: 10px 15px; position: relative; z-index: 2; transition: var(--transition); display: flex; align-items: center; gap: 8px; }
         .nav-links a:hover, .nav-links a.active { color: #fff; }
-        #underline { position: absolute; bottom: 0; height: 3px; background: var(--primary); border-radius: 10px; transition: var(--transition); pointer-events: none; z-index: 1; opacity: 0; }
         
-        .mobile-nav { display: none; position: fixed; bottom: 0; left: 0; width: 100%; background: var(--glass); backdrop-filter: blur(25px); height: 65px; border-top: 1px solid var(--border); z-index: 1001; justify-content: space-around; align-items: center; }
-        .mobile-nav a { display: flex; flex-direction: column; align-items: center; color: var(--gray); font-size: 10px; font-weight: 700; gap: 4px; }
-        .mobile-nav i { font-size: 20px; }
+        #underline { position: absolute; bottom: 0; height: 3px; background: var(--primary); border-radius: 10px; transition: var(--transition); pointer-events: none; z-index: 1; opacity: 0; box-shadow: 0 0 10px var(--primary); }
 
-        /* --- LAYOUT XEM PHIM --- */
+        .search-box { background: rgba(255,255,255,0.07); border-radius: 20px; padding: 8px 15px; display: flex; align-items: center; border: 1px solid var(--border); width: 180px; transition: 0.3s; }
+        .search-box:focus-within { border-color: var(--primary); width: 240px; }
+        .search-box input { background: none; border: none; color: white; padding-left: 10px; outline: none; font-size: 13px; width: 100%; }
+
+        /* --- LAYOUT --- */
         .main-layout { max-width: 1400px; margin: 100px auto 30px; padding: 0 20px; display: grid; grid-template-columns: 1fr 380px; gap: 30px; }
 
         .video-wrapper { background: #000; border-radius: 20px; overflow: hidden; border: 1px solid var(--border); box-shadow: 0 20px 50px rgba(0,0,0,0.5); aspect-ratio: 16/9; }
         .video-wrapper iframe { width: 100%; height: 100%; border: none; }
 
-        .info-card { background: var(--card-bg); border-radius: 20px; padding: 25px; margin-top: 25px; border: 1px solid var(--border); }
-        .info-header h1 { font-size: 28px; font-weight: 900; color: var(--primary); margin-bottom: 10px; }
-        
-        .meta-data { display: flex; gap: 20px; color: var(--gray); font-size: 14px; margin-bottom: 20px; }
-        .meta-data span i { color: var(--primary); margin-right: 5px; }
+        /* DANH SÁCH TẬP PHIM */
+        .episodes-card { background: var(--card-bg); border-radius: 20px; padding: 20px; margin-top: 20px; border: 1px solid var(--border); }
+        .ep-header { font-size: 18px; font-weight: 800; margin-bottom: 15px; color: var(--primary); display: flex; align-items: center; gap: 10px; }
+        .ep-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(60px, 1fr)); gap: 10px; }
+        .ep-item { background: rgba(255,255,255,0.05); padding: 10px; border-radius: 8px; text-align: center; font-weight: 700; font-size: 14px; border: 1px solid var(--border); transition: 0.3s; cursor: pointer; }
+        .ep-item:hover, .ep-item.active { background: var(--primary); color: white; border-color: var(--primary); transform: translateY(-3px); }
 
-        .rating-section { background: rgba(255,255,255,0.03); padding: 15px 20px; border-radius: 15px; margin-bottom: 20px; border: 1px solid var(--border); }
-        .stars { display: flex; gap: 5px; margin-top: 10px; }
-        .stars i { cursor: pointer; color: #333; transition: 0.2s; font-size: 20px; }
-        .stars i.active { color: #ffc107; text-shadow: 0 0 10px rgba(255, 193, 7, 0.4); }
+        .info-card { background: var(--card-bg); border-radius: 20px; padding: 25px; margin-top: 20px; border: 1px solid var(--border); }
+        .info-header h1 { font-size: 26px; font-weight: 900; color: var(--primary); margin-bottom: 10px; }
+        .meta-data { display: flex; gap: 20px; color: var(--gray); font-size: 14px; margin-bottom: 15px; }
 
-        .description { font-size: 15px; color: #ccc; line-height: 1.8; border-top: 1px solid var(--border); padding-top: 15px; }
+        /* --- RATING --- */
+        .stars { display: flex; gap: 5px; margin: 10px 0; }
+        .stars i { cursor: pointer; color: #333; font-size: 18px; }
+        .stars i.active { color: #ffc107; }
 
         /* --- SIDEBAR --- */
         .sidebar-title { font-size: 18px; font-weight: 800; margin-bottom: 15px; border-left: 4px solid var(--primary); padding-left: 12px; }
-        .recommend-list { display: flex; flex-direction: column; gap: 12px; }
-        .rec-item { display: flex; gap: 12px; background: var(--card-bg); padding: 10px; border-radius: 15px; border: 1px solid var(--border); transition: 0.3s; }
-        .rec-item:hover { border-color: var(--primary); transform: translateX(5px); }
-        .rec-thumb { width: 85px; height: 115px; border-radius: 10px; object-fit: cover; }
-        .rec-info h4 { font-size: 14px; font-weight: 700; margin-bottom: 5px; line-height: 1.3; }
+        .rec-item { display: flex; gap: 12px; background: var(--card-bg); padding: 10px; border-radius: 15px; border: 1px solid var(--border); transition: 0.3s; margin-bottom: 12px; }
+        .rec-item:hover { border-color: var(--primary); }
+        .rec-thumb { width: 80px; height: 110px; border-radius: 10px; object-fit: cover; }
+
+        /* Mobile Nav */
+        .mobile-nav { display: none; position: fixed; bottom: 0; left: 0; width: 100%; background: var(--glass); backdrop-filter: blur(25px); height: 65px; border-top: 1px solid var(--border); z-index: 1001; justify-content: space-around; align-items: center; }
+        .mobile-nav a { display: flex; flex-direction: column; align-items: center; color: var(--gray); font-size: 10px; font-weight: 700; gap: 4px; }
 
         @media (max-width: 1100px) {
             .main-layout { grid-template-columns: 1fr; margin-top: 85px; }
-            .nav-links { display: none; }
+            .nav-links, .search-box { display: none; }
             .mobile-nav { display: flex; }
         }
     </style>
@@ -90,6 +99,10 @@
                         <div id="underline"></div>
                     </ul>
                 </nav>
+                <div class="search-box">
+                    <i class="fa-solid fa-magnifying-glass" style="color:var(--gray)"></i>
+                    <input type="text" placeholder="Tìm kiếm...">
+                </div>
                 <div id="userZone"></div>
             </div>
         </div>
@@ -104,46 +117,48 @@
     <main class="main-layout">
         <div class="player-section">
             <div class="video-wrapper">
-                <iframe id="mainPlayer" src="" allowfullscreen></iframe>
+                <iframe id="mainPlayer" src="https://www.youtube.com/embed/dQw4w9WgXcQ" allowfullscreen></iframe>
+            </div>
+
+            <div class="episodes-card">
+                <div class="ep-header"><i class="fa-solid fa-list-ol"></i> Danh sách tập</div>
+                <div class="ep-grid" id="episodeGrid">
+                    <div class="ep-item active">1</div>
+                    <div class="ep-item">2</div>
+                    <div class="ep-item">3</div>
+                    <div class="ep-item">4</div>
+                    <div class="ep-item">5</div>
+                    <div class="ep-item">6</div>
+                    <div class="ep-item">7</div>
+                    <div class="ep-item">8</div>
+                    <div class="ep-item">9</div>
+                    <div class="ep-item">10</div>
+                    <div class="ep-item">11</div>
+                    <div class="ep-item">12</div>
+                </div>
             </div>
 
             <div class="info-card">
-                <div class="info-header"><h1 id="movieTitle">Đang tải phim...</h1></div>
-                
+                <h1 id="movieTitle">Đang tải phim...</h1>
                 <div class="meta-data">
                     <span id="viewCount"><i class="fa-solid fa-eye"></i> 0 views</span>
                     <span id="ratingVal"><i class="fa-solid fa-star"></i> 0.0/10</span>
                 </div>
-
-                <div class="rating-section">
-                    <p style="font-size: 13px; font-weight: 700; color: var(--gray);">ĐÁNH GIÁ (10 SAO)</p>
-                    <div class="stars" id="starGroup">
-                        <i class="fa-solid fa-star" data-val="1"></i>
-                        <i class="fa-solid fa-star" data-val="2"></i>
-                        <i class="fa-solid fa-star" data-val="3"></i>
-                        <i class="fa-solid fa-star" data-val="4"></i>
-                        <i class="fa-solid fa-star" data-val="5"></i>
-                        <i class="fa-solid fa-star" data-val="6"></i>
-                        <i class="fa-solid fa-star" data-val="7"></i>
-                        <i class="fa-solid fa-star" data-val="8"></i>
-                        <i class="fa-solid fa-star" data-val="9"></i>
-                        <i class="fa-solid fa-star" data-val="10"></i>
-                    </div>
+                <div class="stars" id="starGroup">
+                    <i class="fa-solid fa-star" data-val="1"></i><i class="fa-solid fa-star" data-val="2"></i><i class="fa-solid fa-star" data-val="3"></i><i class="fa-solid fa-star" data-val="4"></i><i class="fa-solid fa-star" data-val="5"></i><i class="fa-solid fa-star" data-val="6"></i><i class="fa-solid fa-star" data-val="7"></i><i class="fa-solid fa-star" data-val="8"></i><i class="fa-solid fa-star" data-val="9"></i><i class="fa-solid fa-star" data-val="10"></i>
                 </div>
-
                 <div class="description" id="movieDesc">Đang load mô tả...</div>
             </div>
         </div>
 
         <aside class="sidebar">
-            <h3 class="sidebar-title">Đề xuất cho bạn</h3>
-            <div class="recommend-list" id="sideRecs"></div>
+            <h3 class="sidebar-title">Gợi ý khác</h3>
+            <div id="sideRecs"></div>
         </aside>
     </main>
 
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-        import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
         import { getFirestore, doc, getDoc, setDoc, updateDoc, increment } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
         const firebaseConfig = {
@@ -155,95 +170,71 @@
         };
 
         const app = initializeApp(firebaseConfig);
-        const auth = getAuth(app);
         const db = getFirestore(app);
-
         const urlParams = new URLSearchParams(window.location.search);
         const movieId = urlParams.get('id');
 
         async function init() {
-            if(!movieId) { window.location.href = 'index.html'; return; }
-
+            if(!movieId) return;
             try {
-                // 1. Tải thông tin từ api.json
+                // Load API
                 const res = await fetch('./api.json');
                 const data = await res.json();
-                // Gộp tất cả mảng phim lại để tìm kiếm
-                const allMovies = [...data.updated, ...data.comingSoon, ...data.recommended];
-                // Ép kiểu movieId sang String để so sánh chính xác
-                const current = allMovies.find(m => String(m.id) === String(movieId));
+                const all = [...data.updated, ...data.comingSoon, ...data.recommended];
+                const movie = all.find(m => String(m.id) === String(movieId));
 
-                if(current) {
-                    document.getElementById('movieTitle').innerText = current.title;
-                    document.getElementById('movieDesc').innerText = current.description || "Nội dung đang cập nhật...";
-                    document.title = "Xem phim: " + current.title;
+                if(movie) {
+                    document.getElementById('movieTitle').innerText = movie.title;
+                    document.getElementById('movieDesc').innerText = movie.description || "Nội dung đang cập nhật...";
                     
-                    // Gợi ý phim (trừ phim đang xem)
-                    const recs = allMovies.filter(m => String(m.id) !== String(movieId)).sort(() => 0.5 - Math.random()).slice(0, 8);
+                    // Render Recs
+                    const recs = all.filter(m => String(m.id) !== String(movieId)).sort(() => 0.5 - Math.random()).slice(0, 6);
                     document.getElementById('sideRecs').innerHTML = recs.map(m => `
                         <a href="watch.html?id=${m.id}" class="rec-item">
                             <img src="${m.image}" class="rec-thumb">
-                            <div class="rec-info">
-                                <h4>${m.title}</h4>
-                                <p style="font-size:11px; color:var(--gray)"><i class="fa-solid fa-play"></i> Xem ngay</p>
-                            </div>
-                        </a>
-                    `).join('');
+                            <div class="rec-info"><h4>${m.title}</h4><p style="font-size:11px;color:var(--gray)">Xem ngay</p></div>
+                        </a>`).join('');
                 }
 
-                // 2. Cập nhật Views trên Firebase
+                // Firebase Stats
                 const docRef = doc(db, "movie_stats", String(movieId));
-                const docSnap = await getDoc(docRef);
-                if (!docSnap.exists()) {
-                    await setDoc(docRef, { views: 1, rating: 0, rateCount: 0 });
-                } else {
-                    await updateDoc(docRef, { views: increment(1) });
-                }
-
+                const snap = await getDoc(docRef);
+                if(!snap.exists()) await setDoc(docRef, { views: 1, rating: 0, rateCount: 0 });
+                else await updateDoc(docRef, { views: increment(1) });
+                
                 refreshStats();
-            } catch (e) { console.error("Lỗi:", e); }
+            } catch (e) { console.log(e); }
         }
 
         async function refreshStats() {
-            const docSnap = await getDoc(doc(db, "movie_stats", String(movieId)));
-            if(docSnap.exists()) {
-                const d = docSnap.data();
+            const snap = await getDoc(doc(db, "movie_stats", String(movieId)));
+            if(snap.exists()) {
+                const d = snap.data();
                 document.getElementById('viewCount').innerHTML = `<i class="fa-solid fa-eye"></i> ${d.views || 0} views`;
                 const avg = d.rateCount > 0 ? (d.rating / d.rateCount).toFixed(1) : "0.0";
                 document.getElementById('ratingVal').innerHTML = `<i class="fa-solid fa-star"></i> ${avg}/10`;
             }
         }
 
-        // Logic 10 sao
-        const starItems = document.querySelectorAll('#starGroup i');
-        starItems.forEach(star => {
-            star.onclick = async () => {
-                const val = parseInt(star.getAttribute('data-val'));
-                // Highlight sao
-                starItems.forEach(s => s.classList.remove('active'));
-                star.classList.add('active');
-                let prev = star.previousElementSibling;
-                while(prev) { prev.classList.add('active'); prev = prev.previousElementSibling; }
-
-                // Lưu Firebase
-                try {
-                    await updateDoc(doc(db, "movie_stats", String(movieId)), {
-                        rating: increment(val),
-                        rateCount: increment(1)
-                    });
-                    refreshStats();
-                } catch (e) { alert("Lỗi đánh giá!"); }
-            };
-        });
-
-        // Tabbar Animation
+        // Tabbar Underline Fix
         const underline = document.getElementById('underline');
-        document.querySelectorAll('.tab-item').forEach(tab => {
-            tab.onmouseenter = () => {
+        const tabs = document.querySelectorAll('.tab-item');
+        tabs.forEach(tab => {
+            tab.addEventListener('mouseenter', () => {
                 underline.style.opacity = "1";
                 underline.style.width = `${tab.offsetWidth}px`;
                 underline.style.left = `${tab.offsetLeft}px`;
-            };
+            });
+        });
+        document.querySelector('.nav-links').addEventListener('mouseleave', () => { underline.style.opacity = "0"; });
+
+        // Rating 10 sao
+        document.querySelectorAll('#starGroup i').forEach(s => {
+            s.onclick = async () => {
+                const val = parseInt(s.dataset.val);
+                await updateDoc(doc(db, "movie_stats", String(movieId)), { rating: increment(val), rateCount: increment(1) });
+                refreshStats();
+            }
         });
 
         init();
