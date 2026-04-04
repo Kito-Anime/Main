@@ -3,115 +3,286 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AniStream - Xem Anime Trực Tuyến</title>
-    <link rel="stylesheet" href="style.css">
+    <title>KITO ANIME - Official Final Version</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary: #ff4757;
+            --dark: #0a0a0c;
+            --card-bg: #16181d;
+            --text: #ffffff;
+            --gray: #9ca3af;
+            --border: rgba(255, 255, 255, 0.1);
+            --glass: rgba(10, 10, 12, 0.9);
+            --transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
+        body { background-color: var(--dark); color: var(--text); overflow-x: hidden; line-height: 1.6; }
+        a { text-decoration: none !important; color: inherit; outline: none; }
+        .container { max-width: 1400px; margin: 0 auto; padding: 0 25px; }
+
+        /* --- NAVBAR HIỆN ĐẠI --- */
+        .navbar { 
+            background: var(--glass); height: 80px; display: flex; 
+            align-items: center; position: fixed; top: 0; width: 100%; z-index: 1000; 
+            border-bottom: 1px solid var(--border); backdrop-filter: blur(20px);
+        }
+        .nav-content { width: 100%; display: flex; align-items: center; justify-content: space-between; }
+        .logo { font-size: 26px; font-weight: 900; text-transform: uppercase; cursor: pointer; min-width: 180px; }
+        .logo span { color: var(--primary); }
+
+        .nav-right-group { display: flex; align-items: center; gap: 25px; flex-grow: 1; justify-content: flex-end; }
+
+        /* Tabbar Animation */
+        .nav-links ul { display: flex; gap: 10px; list-style: none; position: relative; }
+        .nav-links a { 
+            font-weight: 700; font-size: 13px; color: var(--gray); 
+            text-transform: uppercase; padding: 10px 15px; position: relative;
+            z-index: 2; transition: var(--transition);
+        }
+        .nav-links a:hover, .nav-links a.active { color: #fff; }
+        
+        #underline {
+            position: absolute; bottom: 0; height: 3px; background: var(--primary);
+            border-radius: 10px; transition: var(--transition); pointer-events: none;
+            box-shadow: 0 0 15px var(--primary); z-index: 1; opacity: 0;
+        }
+
+        /* Search & User */
+        .search-box {
+            background: rgba(255,255,255,0.07); border-radius: 20px; padding: 8px 15px; 
+            display: flex; align-items: center; border: 1px solid var(--border); width: 220px; transition: 0.3s;
+        }
+        .search-box:focus-within { border-color: var(--primary); width: 280px; background: rgba(0,0,0,0.4); }
+        .search-box input { background: none; border: none; color: white; padding-left: 10px; outline: none; font-size: 13px; width: 100%; }
+
+        .user-profile { 
+            display: flex; align-items: center; gap: 10px; 
+            background: rgba(255,255,255,0.08); padding: 5px 15px; 
+            border-radius: 25px; border: 1px solid var(--border); cursor: pointer; transition: 0.3s;
+        }
+        .avatar-img { width: 32px; height: 32px; border-radius: 50%; border: 2px solid var(--primary); object-fit: cover; }
+        .auth-btn { background: var(--primary); color: white; padding: 10px 20px; border-radius: 12px; font-weight: 800; border: none; cursor: pointer; font-size: 13px; }
+
+        /* --- HERO RGB BANNER --- */
+        .hero-wrapper { position: relative; padding: 4px; border-radius: 24px; margin-top: 110px; background: linear-gradient(45deg, #ff4757, #7158e2, #00d2d3, #ff9f43, #ff4757); background-size: 400% 400%; animation: rgb-animation 8s linear infinite; }
+        @keyframes rgb-animation { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
+        .hero { height: 480px; position: relative; display: flex; align-items: center; overflow: hidden; border-radius: 20px; background: #000; }
+        .hero-bg { position: absolute; width: 100%; height: 100%; object-fit: cover; filter: brightness(0.4); transition: 0.8s; }
+        .hero-content { position: relative; z-index: 5; padding-left: 60px; max-width: 650px; }
+        .hero-nav { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(255,255,255,0.1); backdrop-filter: blur(10px); border: none; color: white; width: 45px; height: 45px; border-radius: 50%; cursor: pointer; z-index: 10; transition: 0.3s; display: flex; align-items: center; justify-content: center; }
+        .hero-nav:hover { background: var(--primary); transform: translateY(-50%) scale(1.1); }
+        .hero-nav.prev { left: 20px; }
+        .hero-nav.next { right: 20px; }
+
+        /* --- ANIME GRID & CARDS --- */
+        .section-title { margin: 50px 0 25px; font-size: 24px; font-weight: 900; border-left: 6px solid var(--primary); padding-left: 15px; text-transform: uppercase; }
+        .anime-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 30px; }
+        .anime-card { background: var(--card-bg); border-radius: 18px; overflow: hidden; border: 1px solid var(--border); transition: var(--transition); position: relative; }
+        .anime-card:hover { transform: translateY(-10px); border-color: var(--primary); box-shadow: 0 15px 40px rgba(0,0,0,0.6); }
+        .card-img { height: 310px; position: relative; overflow: hidden; }
+        .card-img img { width: 100%; height: 100%; object-fit: cover; transition: 0.5s; }
+        
+        /* Badges Realtime */
+        .badge-rating { position: absolute; top: 12px; left: 12px; background: #ffc107; color: #000; padding: 4px 10px; border-radius: 8px; font-size: 12px; font-weight: 800; display: flex; align-items: center; gap: 4px; z-index: 2; box-shadow: 0 4px 10px rgba(0,0,0,0.3); }
+        .badge-views { position: absolute; bottom: 12px; right: 12px; background: rgba(0, 0, 0, 0.7); color: #fff; padding: 4px 10px; border-radius: 8px; font-size: 11px; font-weight: 600; display: flex; align-items: center; gap: 5px; backdrop-filter: blur(5px); border: 1px solid rgba(255,255,255,0.1); }
+
+        .card-info { padding: 15px; }
+        .card-info h3 { font-size: 15px; font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: #eee; }
+
+        /* --- FOOTER TỐI GIẢN --- */
+        .footer-simple { margin-top: 80px; padding: 40px 0; text-align: center; border-top: none; }
+        .footer-simple p { color: #555; font-size: 13px; letter-spacing: 1px; }
+        .footer-simple span { color: var(--primary); font-weight: 700; }
+
+        @media (max-width: 1024px) { .nav-links, .search-box { display: none; } }
+    </style>
 </head>
 <body>
-    <header>
-        <div class="logo">Ani<span>Stream</span></div>
-        <nav>
-            <ul>
-                <li><a href="#" class="active">Trang Chủ</a></li>
-                <li><a href="#">Thể Loại</a></li>
-                <li><a href="#">Phim Lẻ</a></li>
-                <li><a href="#">Đang Phát Sóng</a></li>
-            </ul>
-        </nav>
-        <div class="header-actions">
-            <div class="search-box">
-                <input type="text" placeholder="Tìm kiếm anime...">
-                <i class="fas fa-search"></i>
+
+    <header class="navbar">
+        <div class="container nav-content">
+            <div class="logo" onclick="location.href='index.html'">KITO <span>ANIME</span></div>
+            
+            <div class="nav-right-group">
+                <nav class="nav-links">
+                    <ul id="tabList">
+                        <li><a href="index.html" class="tab-item active">Trang Chủ</a></li>
+                        <li><a href="#" class="tab-item">Lịch Chiếu</a></li>
+                        <li><a href="#" class="tab-item">Thể Loại</a></li>
+                        <div id="underline"></div>
+                    </ul>
+                </nav>
+
+                <div class="search-box">
+                    <i class="fa-solid fa-magnifying-glass" style="color:var(--gray)"></i>
+                    <input type="text" id="searchInput" placeholder="Tìm kiếm anime...">
+                </div>
+
+                <div id="userZone">
+                    <button class="auth-btn" onclick="location.href='auth.html'">ĐĂNG NHẬP</button>
+                </div>
             </div>
-            <button class="login-btn">Đăng nhập</button>
         </div>
     </header>
 
-    <section class="hero">
-        <div class="hero-content">
-            <span class="badge">Mới Cập Nhật</span>
-            <h1>Yuragi-sou no Yuuna-san</h1>
-            <p>Fuyuzora Kogarashi có khả năng nhìn thấy các linh hồn và cậu đã chuyển đến nhà trọ Yuragi để tìm chỗ ở giá rẻ. Tại đây, cậu gặp gỡ Yuuna và những cư dân kỳ lạ khác.</p>
-            <div class="hero-buttons">
-                <button class="play-btn"><i class="fas fa-play"></i> Xem Ngay Tập 1</button>
-                <button class="bookmark-btn"><i class="fas fa-bookmark"></i> Lưu Lại</button>
-            </div>
+    <main class="container">
+        <div class="hero-wrapper">
+            <section class="hero">
+                <img src="" class="hero-bg" id="heroImg">
+                <div class="hero-content">
+                    <h1 id="heroTitle">Đang tải...</h1>
+                    <p id="heroDesc" style="color: #bbb; font-size: 14px; margin-top: 10px;"></p>
+                    <button class="auth-btn" id="heroBtn" style="padding: 18px 50px; margin-top: 25px;">XEM NGAY</button>
+                </div>
+                <button class="hero-nav prev" onclick="changeHero(-1)"><i class="fa-solid fa-chevron-left"></i></button>
+                <button class="hero-nav next" onclick="changeHero(1)"><i class="fa-solid fa-chevron-right"></i></button>
+            </section>
         </div>
-    </section>
 
-    <main>
-        <section class="anime-section">
-            <div class="section-header">
-                <h2>Thịnh Hành Trong Tuần</h2>
-                <a href="#" class="view-all">Xem tất cả <i class="fas fa-chevron-right"></i></a>
-            </div>
-            <div class="anime-grid">
-                <div class="anime-card">
-                    <div class="card-image">
-                        <img src="https://via.placeholder.com/250x350/2a2a35/ffffff?text=Dragon+Maid" alt="Miss Kobayashi's Dragon Maid">
-                        <div class="overlay">
-                            <i class="fas fa-play-circle play-icon"></i>
-                        </div>
-                        <span class="ep-badge">Tập 13</span>
-                    </div>
-                    <div class="card-info">
-                        <h3>Miss Kobayashi's Dragon Maid</h3>
-                        <span>Comedy, Slice of Life</span>
-                    </div>
-                </div>
+        <h2 class="section-title">Mới cập nhật</h2>
+        <div class="anime-grid" id="newGrid"></div>
 
-                <div class="anime-card">
-                    <div class="card-image">
-                        <img src="https://via.placeholder.com/250x350/2a2a35/ffffff?text=Adachi+to+Shimamura" alt="Adachi to Shimamura">
-                        <div class="overlay">
-                            <i class="fas fa-play-circle play-icon"></i>
-                        </div>
-                        <span class="ep-badge">Tập 12</span>
-                    </div>
-                    <div class="card-info">
-                        <h3>Adachi to Shimamura</h3>
-                        <span>Romance, School</span>
-                    </div>
-                </div>
+        <h2 class="section-title">Sắp phát hành</h2>
+        <div class="anime-grid" id="comingGrid"></div>
 
-                <div class="anime-card">
-                    <div class="card-image">
-                        <img src="https://via.placeholder.com/250x350/2a2a35/ffffff?text=The+Moon+on+a+Rainy+Night" alt="The Moon on a Rainy Night">
-                        <div class="overlay">
-                            <i class="fas fa-play-circle play-icon"></i>
-                        </div>
-                        <span class="ep-badge">Chap 24</span>
-                    </div>
-                    <div class="card-info">
-                        <h3>The Moon on a Rainy Night</h3>
-                        <span>Drama, Yuri</span>
-                    </div>
-                </div>
-
-                <div class="anime-card">
-                    <div class="card-image">
-                        <img src="https://via.placeholder.com/250x350/2a2a35/ffffff?text=Jujutsu+Kaisen" alt="Jujutsu Kaisen">
-                        <div class="overlay">
-                            <i class="fas fa-play-circle play-icon"></i>
-                        </div>
-                        <span class="ep-badge">Tập 47</span>
-                    </div>
-                    <div class="card-info">
-                        <h3>Jujutsu Kaisen</h3>
-                        <span>Action, Supernatural</span>
-                    </div>
-                </div>
-            </div>
-        </section>
+        <h2 class="section-title">Gợi ý cho bạn</h2>
+        <div class="anime-grid" id="recGrid"></div>
     </main>
 
-    <footer>
-        <div class="footer-content">
-            <div class="logo">Ani<span>Stream</span></div>
-            <p>Trang web xem anime trực tuyến miễn phí chất lượng cao.</p>
-        </div>
+    <footer class="footer-simple">
+        <p>Copyright © 2024 <span>KITO ANIME</span>. All rights reserved.</p>
     </footer>
 
-    <script src="script.js"></script>
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+        import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyBP9ZnwzQrrRY5JNy1DANm3boaWgvhoS_w",
+            authDomain: "kito-anime-vn.firebaseapp.com",
+            projectId: "kito-anime-vn",
+            storageBucket: "kito-anime-vn.firebasestorage.app",
+            appId: "1:287480619398:web:f40d137345407f27874c07"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+
+        let heroList = [];
+        let heroIndex = 0;
+
+        // --- TABBAR ANIMATION ---
+        const underline = document.getElementById('underline');
+        function updateUnderline(el) {
+            if(!el) return;
+            underline.style.opacity = "1";
+            underline.style.width = `${el.offsetWidth}px`;
+            underline.style.left = `${el.offsetLeft}px`;
+        }
+        document.querySelectorAll('.tab-item').forEach(tab => {
+            tab.addEventListener('mouseenter', () => updateUnderline(tab));
+        });
+        document.getElementById('tabList').addEventListener('mouseleave', () => {
+            updateUnderline(document.querySelector('.tab-item.active'));
+        });
+
+        // --- FIREBASE STATS (FIXED) ---
+        async function fetchStats(movieId, rId, vId) {
+            try {
+                // Đảm bảo movieId là string để khớp với ID document trên Firebase
+                const docSnap = await getDoc(doc(db, "movie_stats", String(movieId)));
+                if (docSnap.exists()) {
+                    const stats = docSnap.data();
+                    const rEl = document.getElementById(rId);
+                    const vEl = document.getElementById(vId);
+                    if(rEl) rEl.innerHTML = `<i class="fa-solid fa-star"></i> ${stats.rating || '0.0'}`;
+                    if(vEl) vEl.innerHTML = `<i class="fa-solid fa-eye"></i> ${stats.views || '0'}`;
+                }
+            } catch (e) { console.error("Stats Error:", e); }
+        }
+
+        // --- RENDER LOGIC ---
+        function renderGrid(list, containerId) {
+            const container = document.getElementById(containerId);
+            if(!list || !container) return;
+            container.innerHTML = list.map(m => {
+                const rId = `r-${containerId}-${m.id}`;
+                const vId = `v-${containerId}-${m.id}`;
+                
+                // Gọi fetch stats ngay sau khi render
+                setTimeout(() => fetchStats(m.id, rId, vId), 200);
+
+                return `
+                <a href="watch.html?id=${m.id}" class="anime-card">
+                    <div class="card-img">
+                        <img src="${m.image}">
+                        <div class="badge-rating" id="${rId}"><i class="fa-solid fa-star"></i> --</div>
+                        <div class="badge-views" id="${vId}"><i class="fa-solid fa-eye"></i> --</div>
+                    </div>
+                    <div class="card-info"><h3>${m.title}</h3></div>
+                </a>
+                `;
+            }).join('');
+        }
+
+        async function init() {
+            try {
+                const res = await fetch('./api.json');
+                const data = await res.json();
+
+                renderGrid(data.updated, 'newGrid');
+                renderGrid(data.comingSoon, 'comingGrid');
+                renderGrid(data.recommended, 'recGrid');
+
+                heroList = data.updated.filter(m => m.image_banner).slice(0, 5);
+                if(heroList.length > 0) renderHero(0);
+
+                setTimeout(() => updateUnderline(document.querySelector('.tab-item.active')), 600);
+            } catch (e) { console.error(e); }
+        }
+
+        function renderHero(idx) {
+            const m = heroList[idx];
+            const bg = document.getElementById('heroImg');
+            if(!m || !bg) return;
+            bg.style.opacity = '0';
+            setTimeout(() => {
+                bg.src = m.image_banner;
+                bg.style.opacity = '1';
+                document.getElementById('heroTitle').innerText = m.title;
+                document.getElementById('heroDesc').innerText = m.description?.substring(0, 160) + "...";
+                document.getElementById('heroBtn').onclick = () => location.href = `watch.html?id=${m.id}`;
+            }, 300);
+        }
+
+        window.changeHero = (dir) => {
+            heroIndex = (heroIndex + dir + heroList.length) % heroList.length;
+            renderHero(heroIndex);
+        };
+
+        // --- AUTH CHECK ---
+        onAuthStateChanged(auth, (user) => {
+            const userZone = document.getElementById('userZone');
+            if (user) {
+                const avatar = user.photoURL || `https://api.dicebear.com/7.x/avataaars/svg?seed=${user.email}`;
+                userZone.innerHTML = `
+                    <div class="user-profile" id="logoutBtn">
+                        <img src="${avatar}" class="avatar-img">
+                        <span style="font-weight:700; font-size:13px;">${user.email.split('@')[0]}</span>
+                    </div>
+                `;
+                document.getElementById('logoutBtn').onclick = () => signOut(auth).then(() => location.reload());
+            }
+        });
+
+        init();
+        setInterval(() => changeHero(1), 10000);
+    </script>
 </body>
 </html>
