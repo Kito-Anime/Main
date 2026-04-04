@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KITO ANIME - Official</title>
+    <title>KITO ANIME - Trang Chủ</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
@@ -20,7 +20,7 @@
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
-        body { background-color: var(--dark); color: var(--text); overflow-x: hidden; }
+        body { background-color: var(--dark); color: var(--text); overflow-x: hidden; padding-bottom: 100px; }
         a { text-decoration: none !important; color: inherit; }
 
         /* --- NAVBAR --- */
@@ -29,62 +29,65 @@
             align-items: center; position: fixed; top: 0; width: 100%; z-index: 1000; 
             border-bottom: 1px solid var(--border); backdrop-filter: blur(20px);
         }
-        .nav-content { width: 100%; max-width: 1400px; margin: 0 auto; padding: 0 20px; display: flex; align-items: center; justify-content: space-between; position: relative; }
+        .nav-content { width: 100%; max-width: 1400px; margin: 0 auto; padding: 0 20px; display: flex; align-items: center; justify-content: space-between; }
         
-        .logo { font-size: 24px; font-weight: 900; text-transform: uppercase; cursor: pointer; display: flex; align-items: center; gap: 10px; }
+        .logo { font-size: 24px; font-weight: 900; text-transform: uppercase; cursor: pointer; display: flex; align-items: center; gap: 12px; position: relative; z-index: 10; }
         .logo span { color: var(--primary); }
         .logo-arrow { color: var(--primary); font-size: 18px; animation: pulse 1.5s infinite; text-shadow: 0 0 10px var(--primary); }
 
-        @keyframes pulse { 0%, 100% { opacity: 0.3; transform: scale(0.8); } 50% { opacity: 1; transform: scale(1.2); } }
+        @keyframes pulse { 0%, 100% { opacity: 0.4; transform: scale(0.9); } 50% { opacity: 1; transform: scale(1.1); } }
 
         .nav-right-side { display: flex; align-items: center; gap: 20px; }
         .nav-links ul { display: flex; list-style: none; position: relative; }
         .nav-links a { font-weight: 700; font-size: 13px; color: var(--gray); text-transform: uppercase; padding: 10px 15px; transition: 0.3s; }
         .nav-links a.active, .nav-links a:hover { color: white; }
-        
         #underline { position: absolute; bottom: 0; height: 3px; background: var(--primary); border-radius: 10px; transition: var(--transition); opacity: 0; }
 
         /* --- HERO BANNER --- */
         .hero-wrapper { position: relative; padding: 3px; border-radius: 25px; margin-top: 100px; background: linear-gradient(45deg, #ff4757, #7158e2, #00d2d3, #ff4757); background-size: 400% 400%; animation: rgb-flow 8s linear infinite; }
         @keyframes rgb-flow { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
         
-        .hero { height: 480px; position: relative; overflow: hidden; border-radius: 22px; background: #000; display: flex; align-items: center; }
+        .hero { height: 450px; position: relative; overflow: hidden; border-radius: 22px; background: #000; display: flex; align-items: center; }
         .hero-bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: brightness(0.4); opacity: 0; transition: 1s ease-in-out; }
         .hero-bg.active { opacity: 1; }
         .hero-content { position: relative; z-index: 10; padding: 0 60px; max-width: 700px; transition: 0.8s; opacity: 0; transform: translateX(-30px); }
         .hero-content.active { opacity: 1; transform: translateX(0); }
-        .hero-content h1 { font-size: 42px; font-weight: 900; margin-bottom: 15px; }
+        .hero-content h1 { font-size: 38px; font-weight: 900; margin-bottom: 10px; }
 
-        .hero-btn { position: absolute; top: 50%; transform: translateY(-50%); width: 45px; height: 45px; background: rgba(255,255,255,0.1); border-radius: 50%; border: 1px solid var(--border); color: white; cursor: pointer; z-index: 20; backdrop-filter: blur(5px); }
-        .btn-prev { left: 20px; } .btn-next { right: 20px; }
+        .hero-btn-nav { position: absolute; top: 50%; transform: translateY(-50%); width: 40px; height: 40px; background: rgba(255,255,255,0.1); border-radius: 50%; border: 1px solid var(--border); color: white; cursor: pointer; z-index: 20; backdrop-filter: blur(5px); transition: 0.3s; }
+        .hero-btn-nav:hover { background: var(--primary); }
+        .btn-prev { left: 15px; } .btn-next { right: 15px; }
 
-        /* --- ANIME CARD --- */
-        .anime-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 25px; margin-top: 20px; }
-        .anime-card { background: var(--card-bg); border-radius: 18px; overflow: hidden; border: 1px solid var(--border); transition: 0.3s; position: relative; }
-        .anime-card:hover { transform: translateY(-10px); border-color: var(--primary); }
-        .card-img { height: 280px; position: relative; }
-        .card-img img { width: 100%; height: 100%; object-fit: cover; }
+        /* --- ANIME GRID --- */
+        .section-header { display: flex; align-items: center; justify-content: space-between; margin: 40px 0 20px; }
+        .section-title { font-size: 22px; font-weight: 900; border-left: 5px solid var(--primary); padding-left: 15px; text-transform: uppercase; }
         
-        .badge-stats { position: absolute; top: 10px; left: 10px; background: rgba(0,0,0,0.7); padding: 4px 8px; border-radius: 6px; font-size: 11px; font-weight: 700; color: #ffc107; backdrop-filter: blur(5px); display: flex; align-items: center; gap: 4px; }
-        .badge-views { position: absolute; bottom: 10px; right: 10px; background: rgba(0,0,0,0.7); padding: 4px 8px; border-radius: 6px; font-size: 10px; color: white; backdrop-filter: blur(5px); }
+        .anime-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 20px; }
+        .anime-card { background: var(--card-bg); border-radius: 15px; overflow: hidden; border: 1px solid var(--border); transition: 0.3s; position: relative; }
+        .anime-card:hover { transform: translateY(-8px); border-color: var(--primary); box-shadow: 0 10px 20px rgba(0,0,0,0.4); }
+        
+        .card-img { height: 260px; position: relative; overflow: hidden; }
+        .card-img img { width: 100%; height: 100%; object-fit: cover; transition: 0.5s; }
+        .anime-card:hover .card-img img { transform: scale(1.1); }
+        
+        .badge-rate { position: absolute; top: 10px; left: 10px; background: rgba(0,0,0,0.75); padding: 4px 8px; border-radius: 6px; font-size: 11px; font-weight: 800; color: #ffc107; backdrop-filter: blur(4px); }
+        .badge-views { position: absolute; bottom: 10px; right: 10px; background: rgba(0,0,0,0.75); padding: 4px 8px; border-radius: 6px; font-size: 10px; color: #fff; backdrop-filter: blur(4px); }
 
-        /* --- MOBILE UI --- */
+        /* --- MOBILE --- */
         @media (max-width: 1024px) {
-            .nav-links, .search-box { display: none; }
-            .navbar { height: 70px; }
-            .nav-content { justify-content: center; } /* Logo ra giữa */
+            .nav-links { display: none; }
+            .nav-content { justify-content: center; }
             .logo { font-size: 20px; }
+            .hero { height: 320px; }
+            .hero-content { padding: 0 30px; }
+            .hero-content h1 { font-size: 24px; }
+            .anime-grid { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 12px; }
             .mobile-nav { display: flex; position: fixed; bottom: 0; width: 100%; height: 65px; background: var(--glass); backdrop-filter: blur(20px); border-top: 1px solid var(--border); z-index: 1000; justify-content: space-around; align-items: center; }
-            .mobile-nav a { display: flex; flex-direction: column; align-items: center; font-size: 10px; color: var(--gray); font-weight: 700; gap: 5px; }
+            .mobile-nav a { display: flex; flex-direction: column; align-items: center; font-size: 10px; color: var(--gray); font-weight: 700; gap: 4px; }
             .mobile-nav a.active { color: var(--primary); }
-            .hero { height: 350px; }
-            .hero-content h1 { font-size: 26px; }
-            .anime-grid { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 15px; }
-            body { padding-bottom: 80px; }
         }
 
-        /* Overlay User Profile */
-        .user-dropdown { position: fixed; top: 80px; right: 20px; background: var(--card-bg); border: 1px solid var(--border); border-radius: 15px; padding: 15px; display: none; z-index: 2000; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+        .user-dropdown { position: fixed; top: 80px; right: 20px; background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px; padding: 15px; display: none; z-index: 2000; min-width: 150px; }
         .user-dropdown.active { display: block; }
     </style>
 </head>
@@ -108,7 +111,7 @@
                     </ul>
                 </nav>
                 <div id="userZone">
-                    <button onclick="location.href='auth.html'" style="background:var(--primary); color:white; border:none; padding:8px 20px; border-radius:20px; font-weight:800; cursor:pointer;">LOGIN</button>
+                    <button onclick="location.href='auth.html'" style="background:var(--primary); color:white; border:none; padding:8px 18px; border-radius:20px; font-weight:800; cursor:pointer; font-size:12px;">ĐĂNG NHẬP</button>
                 </div>
             </div>
         </div>
@@ -122,26 +125,32 @@
     </nav>
 
     <div id="userMenu" class="user-dropdown">
-        <p id="userEmail" style="font-size: 12px; margin-bottom: 10px; color: var(--gray);"></p>
-        <button id="btnLogout" style="width:100%; background:var(--primary); border:none; color:white; padding:8px; border-radius:8px; font-weight:700; cursor:pointer;">Đăng xuất</button>
+        <p id="userEmail" style="font-size: 11px; color: var(--gray); margin-bottom: 10px;"></p>
+        <button id="btnLogout" style="width:100%; background:var(--primary); color:white; border:none; padding:8px; border-radius:6px; font-weight:700; cursor:pointer;">Đăng xuất</button>
     </div>
 
-    <main class="container" style="max-width:1400px; margin:0 auto; padding:0 20px;">
+    <main style="max-width:1400px; margin:0 auto; padding:0 20px;">
         <div class="hero-wrapper">
             <section class="hero">
                 <div id="heroBg"></div>
                 <div class="hero-content" id="heroText">
                     <h1 id="hTitle">KITO ANIME</h1>
-                    <p id="hDesc" style="color:var(--gray); margin-bottom:20px;"></p>
-                    <button id="hBtn" style="background:var(--primary); color:white; border:none; padding:12px 30px; border-radius:10px; font-weight:800; cursor:pointer;">XEM NGAY</button>
+                    <p id="hDesc" style="color:#bdc3c7; font-size:14px; margin-bottom:20px;"></p>
+                    <button id="hBtn" style="background:var(--primary); color:white; border:none; padding:10px 25px; border-radius:8px; font-weight:800; cursor:pointer;">XEM NGAY</button>
                 </div>
-                <button class="hero-btn btn-prev" onclick="moveHero(-1)"><i class="fa-solid fa-chevron-left"></i></button>
-                <button class="hero-btn btn-next" onclick="moveHero(1)"><i class="fa-solid fa-chevron-right"></i></button>
+                <button class="hero-btn-nav btn-prev" onclick="moveHero(-1)"><i class="fa-solid fa-chevron-left"></i></button>
+                <button class="hero-btn-nav btn-next" onclick="moveHero(1)"><i class="fa-solid fa-chevron-right"></i></button>
             </section>
         </div>
 
-        <h2 style="margin: 40px 0 20px; font-weight: 900; font-size: 24px; border-left: 5px solid var(--primary); padding-left: 15px;">MỚI CẬP NHẬT</h2>
-        <div class="anime-grid" id="mainGrid"></div>
+        <div class="section-header"><h2 class="section-title">Sắp phát hành</h2></div>
+        <div class="anime-grid" id="comingGrid"></div>
+
+        <div class="section-header"><h2 class="section-title">Mới cập nhật</h2></div>
+        <div class="anime-grid" id="updateGrid"></div>
+
+        <div class="section-header"><h2 class="section-title">Đề xuất cho bạn</h2></div>
+        <div class="anime-grid" id="recGrid"></div>
     </main>
 
     <script type="module">
@@ -154,90 +163,75 @@
         const auth = getAuth(app);
         const db = getFirestore(app);
 
-        let currentUser = null;
-        let movies = [];
+        let allMovies = [];
         let heroIdx = 0;
 
-        // --- AUTH LOGIC ---
+        // AUTH
         onAuthStateChanged(auth, (user) => {
-            currentUser = user;
             const userZone = document.getElementById('userZone');
             const mobileBtn = document.getElementById('mobileUserBtn');
-
             if (user) {
-                const avatar = user.photoURL || `https://api.dicebear.com/7.x/avataaars/svg?seed=${user.email}`;
-                const ui = `<img src="${avatar}" onclick="toggleUserMenu()" style="width:35px; height:35px; border-radius:50%; border:2px solid var(--primary); cursor:pointer;">`;
-                userZone.innerHTML = ui;
+                userZone.innerHTML = `<img src="${user.photoURL || 'https://api.dicebear.com/7.x/avataaars/svg?seed='+user.email}" onclick="toggleMenu()" style="width:35px; height:35px; border-radius:50%; border:2px solid var(--primary); cursor:pointer;">`;
                 document.getElementById('userEmail').innerText = user.email;
-                
-                // Khi nhấn "Cá nhân" trên Mobile
-                mobileBtn.onclick = () => toggleUserMenu();
+                mobileBtn.onclick = () => toggleMenu();
             } else {
                 mobileBtn.onclick = () => location.href = 'auth.html';
             }
         });
 
-        window.toggleUserMenu = () => document.getElementById('userMenu').classList.toggle('active');
+        window.toggleMenu = () => document.getElementById('userMenu').classList.toggle('active');
         document.getElementById('btnLogout').onclick = () => signOut(auth).then(() => location.reload());
 
-        // --- DATA & STATS ---
-        async function fetchMovieStats(id) {
-            try {
-                const snap = await getDoc(doc(db, "movie_stats", String(id)));
-                if(snap.exists()) {
-                    const data = snap.data();
-                    const rate = data.rateCount > 0 ? (data.rating / data.rateCount).toFixed(1) : "0.0";
-                    document.getElementById(`rate-${id}`).innerHTML = `<i class="fa-solid fa-star"></i> ${rate}`;
-                    document.getElementById(`view-${id}`).innerHTML = `<i class="fa-solid fa-eye"></i> ${data.views || 0}`;
-                }
-            } catch (e) {}
-        }
-
-        async function init() {
+        // LOAD DATA
+        async function load() {
             const res = await fetch('./api.json');
             const data = await res.json();
-            movies = data.updated;
+            
+            render(data.comingSoon, 'comingGrid');
+            render(data.updated, 'updateGrid');
+            render(data.recommended, 'recGrid');
 
-            // Render Grid
-            document.getElementById('mainGrid').innerHTML = movies.map(m => {
-                setTimeout(() => fetchMovieStats(m.id), 200);
+            allMovies = data.updated.slice(0, 5);
+            updateHero();
+        }
+
+        async function getStats(id) {
+            const snap = await getDoc(doc(db, "movie_stats", String(id)));
+            if(snap.exists()) {
+                const d = snap.data();
+                const rate = d.rateCount > 0 ? (d.rating / d.rateCount).toFixed(1) : "0.0";
+                document.getElementById(`r-${id}`).innerText = rate;
+                document.getElementById(`v-${id}`).innerText = d.views || 0;
+            }
+        }
+
+        function render(list, gridId) {
+            document.getElementById(gridId).innerHTML = list.map(m => {
+                getStats(m.id);
                 return `
                 <a href="watch.html?id=${m.id}" class="anime-card">
                     <div class="card-img">
                         <img src="${m.image}" loading="lazy">
-                        <div class="badge-stats" id="rate-${m.id}"><i class="fa-solid fa-star"></i> --</div>
-                        <div class="badge-views" id="view-${m.id}"><i class="fa-solid fa-eye"></i> --</div>
+                        <div class="badge-rate"><i class="fa-solid fa-star"></i> <span id="r-${m.id}">--</span></div>
+                        <div class="badge-views"><i class="fa-solid fa-eye"></i> <span id="v-${m.id}">--</span></div>
                     </div>
-                    <div style="padding:15px">
-                        <h3 style="font-size:14px; font-weight:700; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">${m.title}</h3>
-                    </div>
+                    <div style="padding:12px"><h3 style="font-size:13px; font-weight:700; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">${m.title}</h3></div>
                 </a>`;
             }).join('');
-
-            updateHero();
         }
 
-        window.moveHero = (dir) => {
-            heroIdx = (heroIdx + dir + 5) % 5;
-            updateHero();
-        }
-
+        window.moveHero = (n) => { heroIdx = (heroIdx + n + allMovies.length) % allMovies.length; updateHero(); }
         function updateHero() {
-            const m = movies[heroIdx];
-            if(!m) return;
-            const bg = document.getElementById('heroBg');
-            const txt = document.getElementById('heroText');
-            
-            bg.innerHTML = `<img src="${m.image_banner}" class="hero-bg active">`;
+            const m = allMovies[heroIdx];
+            document.getElementById('heroBg').innerHTML = `<img src="${m.image_banner}" class="hero-bg active">`;
             document.getElementById('hTitle').innerText = m.title;
             document.getElementById('hDesc').innerText = m.description || "";
             document.getElementById('hBtn').onclick = () => location.href = `watch.html?id=${m.id}`;
-            
-            txt.classList.remove('active');
-            setTimeout(() => txt.classList.add('active'), 50);
+            const txt = document.getElementById('heroText');
+            txt.classList.remove('active'); setTimeout(() => txt.classList.add('active'), 50);
         }
 
-        init();
+        load();
     </script>
 </body>
 </html>
