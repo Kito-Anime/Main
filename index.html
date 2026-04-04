@@ -29,66 +29,63 @@
             align-items: center; position: fixed; top: 0; width: 100%; z-index: 1000; 
             border-bottom: 1px solid var(--border); backdrop-filter: blur(20px);
         }
-        .nav-content { width: 100%; max-width: 1400px; margin: 0 auto; padding: 0 20px; display: flex; align-items: center; justify-content: space-between; }
+        .nav-content { width: 100%; max-width: 1400px; margin: 0 auto; padding: 0 20px; display: flex; align-items: center; justify-content: space-between; gap: 30px; }
         
-        .logo { font-size: 24px; font-weight: 900; text-transform: uppercase; cursor: pointer; display: flex; align-items: center; gap: 12px; position: relative; z-index: 10; }
+        .logo { font-size: 24px; font-weight: 900; text-transform: uppercase; cursor: pointer; display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
         .logo span { color: var(--primary); }
         .logo-arrow { color: var(--primary); font-size: 18px; animation: pulse 1.5s infinite; text-shadow: 0 0 10px var(--primary); }
-
         @keyframes pulse { 0%, 100% { opacity: 0.4; transform: scale(0.9); } 50% { opacity: 1; transform: scale(1.1); } }
 
-        .nav-right-side { display: flex; align-items: center; gap: 20px; }
+        .nav-right-side { display: flex; align-items: center; gap: 20px; flex-grow: 1; justify-content: flex-end; }
+        
+        /* Search Desktop */
+        .search-wrapper { position: relative; width: 250px; }
+        .search-box { background: rgba(255,255,255,0.07); border-radius: 20px; padding: 8px 15px; display: flex; align-items: center; border: 1px solid var(--border); transition: 0.3s; }
+        .search-box:focus-within { border-color: var(--primary); width: 300px; background: rgba(255,255,255,0.12); }
+        .search-box input { background: none; border: none; color: white; padding-left: 10px; outline: none; font-size: 13px; width: 100%; }
+
+        .search-results { position: absolute; top: 50px; right: 0; width: 350px; background: var(--card-bg); border-radius: 15px; border: 1px solid var(--border); display: none; max-height: 400px; overflow-y: auto; z-index: 100; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+        .search-results.active { display: block; }
+
         .nav-links ul { display: flex; list-style: none; position: relative; }
-        .nav-links a { font-weight: 700; font-size: 13px; color: var(--gray); text-transform: uppercase; padding: 10px 15px; transition: 0.3s; }
-        .nav-links a.active, .nav-links a:hover { color: white; }
+        .nav-links a { font-weight: 700; font-size: 13px; color: var(--gray); text-transform: uppercase; padding: 10px 15px; transition: 0.3s; white-space: nowrap; }
+        .nav-links a:hover { color: white; }
         #underline { position: absolute; bottom: 0; height: 3px; background: var(--primary); border-radius: 10px; transition: var(--transition); opacity: 0; }
 
-        /* --- HERO BANNER --- */
+        /* --- HERO --- */
         .hero-wrapper { position: relative; padding: 3px; border-radius: 25px; margin-top: 100px; background: linear-gradient(45deg, #ff4757, #7158e2, #00d2d3, #ff4757); background-size: 400% 400%; animation: rgb-flow 8s linear infinite; }
         @keyframes rgb-flow { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
-        
         .hero { height: 450px; position: relative; overflow: hidden; border-radius: 22px; background: #000; display: flex; align-items: center; }
-        .hero-bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: brightness(0.4); opacity: 0; transition: 1s ease-in-out; }
+        .hero-bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: brightness(0.4); opacity: 0; transition: 1s; }
         .hero-bg.active { opacity: 1; }
-        .hero-content { position: relative; z-index: 10; padding: 0 60px; max-width: 700px; transition: 0.8s; opacity: 0; transform: translateX(-30px); }
+        .hero-content { position: relative; z-index: 10; padding: 0 60px; max-width: 700px; opacity: 0; transform: translateX(-30px); transition: 0.8s; }
         .hero-content.active { opacity: 1; transform: translateX(0); }
-        .hero-content h1 { font-size: 38px; font-weight: 900; margin-bottom: 10px; }
 
-        .hero-btn-nav { position: absolute; top: 50%; transform: translateY(-50%); width: 40px; height: 40px; background: rgba(255,255,255,0.1); border-radius: 50%; border: 1px solid var(--border); color: white; cursor: pointer; z-index: 20; backdrop-filter: blur(5px); transition: 0.3s; }
-        .hero-btn-nav:hover { background: var(--primary); }
-        .btn-prev { left: 15px; } .btn-next { right: 15px; }
-
-        /* --- ANIME GRID --- */
-        .section-header { display: flex; align-items: center; justify-content: space-between; margin: 40px 0 20px; }
-        .section-title { font-size: 22px; font-weight: 900; border-left: 5px solid var(--primary); padding-left: 15px; text-transform: uppercase; }
-        
+        /* --- GRID --- */
+        .section-title { font-size: 22px; font-weight: 900; border-left: 5px solid var(--primary); padding-left: 15px; margin: 40px 0 20px; text-transform: uppercase; }
         .anime-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 20px; }
         .anime-card { background: var(--card-bg); border-radius: 15px; overflow: hidden; border: 1px solid var(--border); transition: 0.3s; position: relative; }
-        .anime-card:hover { transform: translateY(-8px); border-color: var(--primary); box-shadow: 0 10px 20px rgba(0,0,0,0.4); }
-        
+        .anime-card:hover { transform: translateY(-8px); border-color: var(--primary); }
         .card-img { height: 260px; position: relative; overflow: hidden; }
-        .card-img img { width: 100%; height: 100%; object-fit: cover; transition: 0.5s; }
-        .anime-card:hover .card-img img { transform: scale(1.1); }
-        
-        .badge-rate { position: absolute; top: 10px; left: 10px; background: rgba(0,0,0,0.75); padding: 4px 8px; border-radius: 6px; font-size: 11px; font-weight: 800; color: #ffc107; backdrop-filter: blur(4px); }
-        .badge-views { position: absolute; bottom: 10px; right: 10px; background: rgba(0,0,0,0.75); padding: 4px 8px; border-radius: 6px; font-size: 10px; color: #fff; backdrop-filter: blur(4px); }
+        .card-img img { width: 100%; height: 100%; object-fit: cover; }
+        .badge-rate { position: absolute; top: 10px; left: 10px; background: rgba(0,0,0,0.7); padding: 4px 8px; border-radius: 6px; font-size: 11px; font-weight: 800; color: #ffc107; backdrop-filter: blur(4px); }
+
+        /* --- PROFILE OVERLAY --- */
+        .user-modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.85); backdrop-filter: blur(10px); display: none; align-items: center; justify-content: center; z-index: 9999; }
+        .user-modal-overlay.active { display: flex; }
+        .profile-card { background: var(--card-bg); width: 90%; max-width: 350px; padding: 40px 30px; border-radius: 30px; border: 1px solid var(--border); text-align: center; position: relative; }
+        .profile-avatar { width: 100px; height: 100px; border-radius: 50%; border: 4px solid var(--primary); margin-bottom: 20px; }
 
         /* --- MOBILE --- */
         @media (max-width: 1024px) {
-            .nav-links { display: none; }
+            .nav-links, .search-wrapper { display: none; }
             .nav-content { justify-content: center; }
-            .logo { font-size: 20px; }
             .hero { height: 320px; }
             .hero-content { padding: 0 30px; }
-            .hero-content h1 { font-size: 24px; }
-            .anime-grid { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 12px; }
             .mobile-nav { display: flex; position: fixed; bottom: 0; width: 100%; height: 65px; background: var(--glass); backdrop-filter: blur(20px); border-top: 1px solid var(--border); z-index: 1000; justify-content: space-around; align-items: center; }
             .mobile-nav a { display: flex; flex-direction: column; align-items: center; font-size: 10px; color: var(--gray); font-weight: 700; gap: 4px; }
             .mobile-nav a.active { color: var(--primary); }
         }
-
-        .user-dropdown { position: fixed; top: 80px; right: 20px; background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px; padding: 15px; display: none; z-index: 2000; min-width: 150px; }
-        .user-dropdown.active { display: block; }
     </style>
 </head>
 <body>
@@ -102,11 +99,19 @@
             </div>
             
             <div class="nav-right-side">
+                <div class="search-wrapper">
+                    <div class="search-box">
+                        <i class="fa-solid fa-magnifying-glass" style="color:var(--gray)"></i>
+                        <input type="text" id="searchInput" placeholder="Tìm kiếm phim...">
+                    </div>
+                    <div class="search-results" id="searchRes"></div>
+                </div>
+
                 <nav class="nav-links">
                     <ul id="tabList">
-                        <li><a href="index.html" class="tab-item active">Trang Chủ</a></li>
-                        <li><a href="#" class="tab-item">Thể Loại</a></li>
-                        <li><a href="#" class="tab-item">Lịch Sử</a></li>
+                        <li><a href="index.html" class="active">Trang Chủ</a></li>
+                        <li><a href="#">Thể Loại</a></li>
+                        <li><a href="#">Lịch Sử</a></li>
                         <div id="underline"></div>
                     </ul>
                 </nav>
@@ -119,14 +124,19 @@
 
     <nav class="mobile-nav">
         <a href="index.html" class="active"><i class="fa-solid fa-house"></i><span>Home</span></a>
-        <a href="#"><i class="fa-solid fa-magnifying-glass"></i><span>Tìm kiếm</span></a>
+        <a href="javascript:void(0)" onclick="openMobileSearch()"><i class="fa-solid fa-magnifying-glass"></i><span>Tìm kiếm</span></a>
         <a href="#"><i class="fa-solid fa-clock-rotate-left"></i><span>Lịch sử</span></a>
         <a href="javascript:void(0)" id="mobileUserBtn"><i class="fa-solid fa-user"></i><span>Cá nhân</span></a>
     </nav>
 
-    <div id="userMenu" class="user-dropdown">
-        <p id="userEmail" style="font-size: 11px; color: var(--gray); margin-bottom: 10px;"></p>
-        <button id="btnLogout" style="width:100%; background:var(--primary); color:white; border:none; padding:8px; border-radius:6px; font-weight:700; cursor:pointer;">Đăng xuất</button>
+    <div class="user-modal-overlay" id="profileModal">
+        <div class="profile-card">
+            <span onclick="closeProfile()" style="position:absolute; top:15px; right:20px; cursor:pointer; font-size:24px; color:var(--gray)">&times;</span>
+            <img src="" id="mAvatar" class="profile-avatar">
+            <h2 id="mName" style="margin-bottom:5px">Người dùng Kito</h2>
+            <p id="mEmail" style="color:var(--gray); font-size:13px; margin-bottom:25px"></p>
+            <button id="btnLogout" style="width:100%; background:var(--primary); color:white; border:none; padding:12px; border-radius:12px; font-weight:800; cursor:pointer;">ĐĂNG XUẤT</button>
+        </div>
     </div>
 
     <main style="max-width:1400px; margin:0 auto; padding:0 20px;">
@@ -138,18 +148,16 @@
                     <p id="hDesc" style="color:#bdc3c7; font-size:14px; margin-bottom:20px;"></p>
                     <button id="hBtn" style="background:var(--primary); color:white; border:none; padding:10px 25px; border-radius:8px; font-weight:800; cursor:pointer;">XEM NGAY</button>
                 </div>
-                <button class="hero-btn-nav btn-prev" onclick="moveHero(-1)"><i class="fa-solid fa-chevron-left"></i></button>
-                <button class="hero-btn-nav btn-next" onclick="moveHero(1)"><i class="fa-solid fa-chevron-right"></i></button>
             </section>
         </div>
 
-        <div class="section-header"><h2 class="section-title">Sắp phát hành</h2></div>
+        <h2 class="section-title">Sắp phát hành</h2>
         <div class="anime-grid" id="comingGrid"></div>
 
-        <div class="section-header"><h2 class="section-title">Mới cập nhật</h2></div>
+        <h2 class="section-title">Mới cập nhật</h2>
         <div class="anime-grid" id="updateGrid"></div>
 
-        <div class="section-header"><h2 class="section-title">Đề xuất cho bạn</h2></div>
+        <h2 class="section-title">Đề xuất cho bạn</h2>
         <div class="anime-grid" id="recGrid"></div>
     </main>
 
@@ -163,72 +171,76 @@
         const auth = getAuth(app);
         const db = getFirestore(app);
 
-        let allMovies = [];
-        let heroIdx = 0;
+        let allData = [];
 
-        // AUTH
+        // --- AUTH & PROFILE ---
         onAuthStateChanged(auth, (user) => {
             const userZone = document.getElementById('userZone');
             const mobileBtn = document.getElementById('mobileUserBtn');
             if (user) {
-                userZone.innerHTML = `<img src="${user.photoURL || 'https://api.dicebear.com/7.x/avataaars/svg?seed='+user.email}" onclick="toggleMenu()" style="width:35px; height:35px; border-radius:50%; border:2px solid var(--primary); cursor:pointer;">`;
-                document.getElementById('userEmail').innerText = user.email;
-                mobileBtn.onclick = () => toggleMenu();
+                const avatar = user.photoURL || `https://api.dicebear.com/7.x/avataaars/svg?seed=${user.email}`;
+                userZone.innerHTML = `<img src="${avatar}" onclick="openProfile()" style="width:38px; height:38px; border-radius:50%; border:2px solid var(--primary); cursor:pointer;">`;
+                document.getElementById('mAvatar').src = avatar;
+                document.getElementById('mName').innerText = user.displayName || "Thành viên Kito";
+                document.getElementById('mEmail').innerText = user.email;
+                mobileBtn.onclick = () => openProfile();
             } else {
                 mobileBtn.onclick = () => location.href = 'auth.html';
             }
         });
 
-        window.toggleMenu = () => document.getElementById('userMenu').classList.toggle('active');
+        window.openProfile = () => document.getElementById('profileModal').classList.add('active');
+        window.closeProfile = () => document.getElementById('profileModal').classList.remove('active');
         document.getElementById('btnLogout').onclick = () => signOut(auth).then(() => location.reload());
 
-        // LOAD DATA
+        // --- TÌM KIẾM ---
+        document.getElementById('searchInput').oninput = (e) => {
+            const val = e.target.value.toLowerCase();
+            const resBox = document.getElementById('searchRes');
+            if(val.length < 1) { resBox.classList.remove('active'); return; }
+            
+            const filtered = allData.filter(m => m.title.toLowerCase().includes(val)).slice(0, 5);
+            if(filtered.length > 0) {
+                resBox.classList.add('active');
+                resBox.innerHTML = filtered.map(m => `
+                    <a href="watch.html?id=${m.id}" style="display:flex; gap:10px; padding:10px; border-bottom:1px solid var(--border)">
+                        <img src="${m.image}" style="width:50px; height:70px; object-fit:cover; border-radius:5px">
+                        <div><h4 style="font-size:14px">${m.title}</h4><p style="font-size:11px; color:var(--gray)">Xem ngay</p></div>
+                    </a>`).join('');
+            } else { resBox.classList.remove('active'); }
+        };
+
+        // --- LOAD DATA ---
         async function load() {
             const res = await fetch('./api.json');
             const data = await res.json();
+            allData = [...data.updated, ...data.comingSoon, ...data.recommended];
             
             render(data.comingSoon, 'comingGrid');
             render(data.updated, 'updateGrid');
             render(data.recommended, 'recGrid');
-
-            allMovies = data.updated.slice(0, 5);
-            updateHero();
+            updateHero(data.updated[0]);
         }
 
-        async function getStats(id) {
-            const snap = await getDoc(doc(db, "movie_stats", String(id)));
-            if(snap.exists()) {
-                const d = snap.data();
-                const rate = d.rateCount > 0 ? (d.rating / d.rateCount).toFixed(1) : "0.0";
-                document.getElementById(`r-${id}`).innerText = rate;
-                document.getElementById(`v-${id}`).innerText = d.views || 0;
-            }
-        }
-
-        function render(list, gridId) {
-            document.getElementById(gridId).innerHTML = list.map(m => {
-                getStats(m.id);
-                return `
+        function render(list, id) {
+            document.getElementById(id).innerHTML = list.map(m => `
                 <a href="watch.html?id=${m.id}" class="anime-card">
                     <div class="card-img">
                         <img src="${m.image}" loading="lazy">
-                        <div class="badge-rate"><i class="fa-solid fa-star"></i> <span id="r-${m.id}">--</span></div>
-                        <div class="badge-views"><i class="fa-solid fa-eye"></i> <span id="v-${m.id}">--</span></div>
+                        <div class="badge-rate"><i class="fa-solid fa-star"></i> 10.0</div>
                     </div>
                     <div style="padding:12px"><h3 style="font-size:13px; font-weight:700; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">${m.title}</h3></div>
-                </a>`;
-            }).join('');
+                </a>`).join('');
         }
 
-        window.moveHero = (n) => { heroIdx = (heroIdx + n + allMovies.length) % allMovies.length; updateHero(); }
-        function updateHero() {
-            const m = allMovies[heroIdx];
+        function updateHero(m) {
+            if(!m) return;
             document.getElementById('heroBg').innerHTML = `<img src="${m.image_banner}" class="hero-bg active">`;
             document.getElementById('hTitle').innerText = m.title;
             document.getElementById('hDesc').innerText = m.description || "";
             document.getElementById('hBtn').onclick = () => location.href = `watch.html?id=${m.id}`;
             const txt = document.getElementById('heroText');
-            txt.classList.remove('active'); setTimeout(() => txt.classList.add('active'), 50);
+            txt.classList.add('active');
         }
 
         load();
