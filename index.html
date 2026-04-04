@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KITO ANIME - Trang Chủ</title>
+    <title>KITO ANIME - Official</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
@@ -29,215 +29,215 @@
             align-items: center; position: fixed; top: 0; width: 100%; z-index: 1000; 
             border-bottom: 1px solid var(--border); backdrop-filter: blur(20px);
         }
-        .nav-content { width: 100%; max-width: 1400px; margin: 0 auto; padding: 0 20px; display: flex; align-items: center; justify-content: space-between; gap: 20px; }
-        .logo { font-size: 24px; font-weight: 900; text-transform: uppercase; cursor: pointer; flex-shrink: 0; }
+        .nav-content { width: 100%; max-width: 1400px; margin: 0 auto; padding: 0 20px; display: flex; align-items: center; justify-content: space-between; position: relative; }
+        
+        .logo { font-size: 24px; font-weight: 900; text-transform: uppercase; cursor: pointer; display: flex; align-items: center; gap: 10px; }
         .logo span { color: var(--primary); }
+        .logo-arrow { color: var(--primary); font-size: 18px; animation: pulse 1.5s infinite; text-shadow: 0 0 10px var(--primary); }
 
-        .nav-right-side { display: flex; align-items: center; gap: 15px; flex-grow: 1; justify-content: flex-end; }
-        
-        .nav-links { position: relative; }
+        @keyframes pulse { 0%, 100% { opacity: 0.3; transform: scale(0.8); } 50% { opacity: 1; transform: scale(1.2); } }
+
+        .nav-right-side { display: flex; align-items: center; gap: 20px; }
         .nav-links ul { display: flex; list-style: none; position: relative; }
-        .nav-links a { font-weight: 700; font-size: 13px; color: var(--gray); text-transform: uppercase; padding: 10px 15px; transition: 0.3s; display: flex; align-items: center; gap: 8px; white-space: nowrap; }
-        .nav-links a:hover, .nav-links a.active { color: #fff; }
+        .nav-links a { font-weight: 700; font-size: 13px; color: var(--gray); text-transform: uppercase; padding: 10px 15px; transition: 0.3s; }
+        .nav-links a.active, .nav-links a:hover { color: white; }
         
-        #underline { position: absolute; bottom: 0; height: 3px; background: var(--primary); border-radius: 10px; transition: var(--transition); pointer-events: none; opacity: 0; box-shadow: 0 0 10px var(--primary); }
-
-        /* Search Desktop */
-        .search-container { position: relative; }
-        .search-box { 
-            background: rgba(255,255,255,0.07); border-radius: 20px; padding: 8px 15px; 
-            display: flex; align-items: center; border: 1px solid var(--border); width: 180px; transition: 0.4s;
-        }
-        .search-box:focus-within { border-color: var(--primary); width: 260px; background: rgba(255,255,255,0.12); }
-        .search-box input { background: none; border: none; color: white; padding-left: 10px; outline: none; font-size: 13px; width: 100%; }
+        #underline { position: absolute; bottom: 0; height: 3px; background: var(--primary); border-radius: 10px; transition: var(--transition); opacity: 0; }
 
         /* --- HERO BANNER --- */
         .hero-wrapper { position: relative; padding: 3px; border-radius: 25px; margin-top: 100px; background: linear-gradient(45deg, #ff4757, #7158e2, #00d2d3, #ff4757); background-size: 400% 400%; animation: rgb-flow 8s linear infinite; }
         @keyframes rgb-flow { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
         
-        .hero { height: 480px; position: relative; display: flex; align-items: center; overflow: hidden; border-radius: 22px; background: #000; }
-        .hero-bg { position: absolute; width: 100%; height: 100%; object-fit: cover; filter: brightness(0.5); transition: 1s ease-in-out; opacity: 0; }
+        .hero { height: 480px; position: relative; overflow: hidden; border-radius: 22px; background: #000; display: flex; align-items: center; }
+        .hero-bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: brightness(0.4); opacity: 0; transition: 1s ease-in-out; }
         .hero-bg.active { opacity: 1; }
-        .hero-content { position: relative; z-index: 5; padding: 0 60px; max-width: 700px; transform: translateY(20px); opacity: 0; transition: 0.8s; }
-        .hero-content.active { transform: translateY(0); opacity: 1; }
-        .hero-content h1 { font-size: 42px; font-weight: 900; line-height: 1.2; text-shadow: 0 2px 10px rgba(0,0,0,0.5); }
+        .hero-content { position: relative; z-index: 10; padding: 0 60px; max-width: 700px; transition: 0.8s; opacity: 0; transform: translateX(-30px); }
+        .hero-content.active { opacity: 1; transform: translateX(0); }
+        .hero-content h1 { font-size: 42px; font-weight: 900; margin-bottom: 15px; }
 
-        /* Arrows */
-        .hero-btn { position: absolute; top: 50%; transform: translateY(-50%); width: 50px; height: 50px; background: rgba(255,255,255,0.1); border: 1px solid var(--border); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 10; backdrop-filter: blur(10px); transition: 0.3s; }
-        .hero-btn:hover { background: var(--primary); border-color: var(--primary); }
-        .btn-prev { left: 20px; }
-        .btn-next { right: 20px; }
+        .hero-btn { position: absolute; top: 50%; transform: translateY(-50%); width: 45px; height: 45px; background: rgba(255,255,255,0.1); border-radius: 50%; border: 1px solid var(--border); color: white; cursor: pointer; z-index: 20; backdrop-filter: blur(5px); }
+        .btn-prev { left: 20px; } .btn-next { right: 20px; }
 
-        /* --- MOBILE BOTTOM NAV --- */
-        .mobile-nav { display: none; position: fixed; bottom: 0; left: 0; width: 100%; background: var(--glass); backdrop-filter: blur(25px); height: 65px; border-top: 1px solid var(--border); z-index: 1001; justify-content: space-around; align-items: center; }
-        .mobile-nav a { display: flex; flex-direction: column; align-items: center; color: var(--gray); font-size: 11px; font-weight: 700; gap: 4px; }
-        .mobile-nav a.active { color: var(--primary); }
+        /* --- ANIME CARD --- */
+        .anime-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 25px; margin-top: 20px; }
+        .anime-card { background: var(--card-bg); border-radius: 18px; overflow: hidden; border: 1px solid var(--border); transition: 0.3s; position: relative; }
+        .anime-card:hover { transform: translateY(-10px); border-color: var(--primary); }
+        .card-img { height: 280px; position: relative; }
+        .card-img img { width: 100%; height: 100%; object-fit: cover; }
+        
+        .badge-stats { position: absolute; top: 10px; left: 10px; background: rgba(0,0,0,0.7); padding: 4px 8px; border-radius: 6px; font-size: 11px; font-weight: 700; color: #ffc107; backdrop-filter: blur(5px); display: flex; align-items: center; gap: 4px; }
+        .badge-views { position: absolute; bottom: 10px; right: 10px; background: rgba(0,0,0,0.7); padding: 4px 8px; border-radius: 6px; font-size: 10px; color: white; backdrop-filter: blur(5px); }
 
-        /* Mobile Search Overlay */
-        .mobile-search-ui { position: fixed; top: -100%; left: 0; width: 100%; height: 100%; background: var(--dark); z-index: 2000; transition: 0.5s cubic-bezier(0.23, 1, 0.32, 1); padding: 20px; }
-        .mobile-search-ui.active { top: 0; }
-        .m-search-header { display: flex; align-items: center; gap: 15px; margin-bottom: 20px; }
-        .m-search-input { flex: 1; background: #1a1a1e; border: 1px solid var(--border); padding: 12px 20px; border-radius: 12px; color: white; outline: none; }
-
-        /* Grid */
-        .section-title { margin: 40px 0 20px; font-size: 24px; font-weight: 900; border-left: 5px solid var(--primary); padding-left: 15px; }
-        .anime-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 25px; margin-bottom: 40px; }
-
+        /* --- MOBILE UI --- */
         @media (max-width: 1024px) {
-            .nav-links, .search-container { display: none; }
-            .mobile-nav { display: flex; }
+            .nav-links, .search-box { display: none; }
+            .navbar { height: 70px; }
+            .nav-content { justify-content: center; } /* Logo ra giữa */
+            .logo { font-size: 20px; }
+            .mobile-nav { display: flex; position: fixed; bottom: 0; width: 100%; height: 65px; background: var(--glass); backdrop-filter: blur(20px); border-top: 1px solid var(--border); z-index: 1000; justify-content: space-around; align-items: center; }
+            .mobile-nav a { display: flex; flex-direction: column; align-items: center; font-size: 10px; color: var(--gray); font-weight: 700; gap: 5px; }
+            .mobile-nav a.active { color: var(--primary); }
             .hero { height: 350px; }
-            .hero-content { padding: 0 30px; }
-            .hero-content h1 { font-size: 28px; }
-            .hero-btn { width: 40px; height: 40px; font-size: 14px; }
+            .hero-content h1 { font-size: 26px; }
             .anime-grid { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 15px; }
             body { padding-bottom: 80px; }
         }
+
+        /* Overlay User Profile */
+        .user-dropdown { position: fixed; top: 80px; right: 20px; background: var(--card-bg); border: 1px solid var(--border); border-radius: 15px; padding: 15px; display: none; z-index: 2000; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+        .user-dropdown.active { display: block; }
     </style>
 </head>
 <body>
 
     <header class="navbar">
         <div class="nav-content">
-            <div class="logo" onclick="location.href='index.html'">KITO <span>ANIME</span></div>
+            <div class="logo" onclick="location.href='index.html'">
+                <i class="fa-solid fa-angles-right logo-arrow"></i>
+                KITO <span>ANIME</span>
+                <i class="fa-solid fa-angles-left logo-arrow"></i>
+            </div>
             
             <div class="nav-right-side">
                 <nav class="nav-links">
                     <ul id="tabList">
-                        <li><a href="index.html" class="tab-item active"><i class="fa-solid fa-house"></i> Trang Chủ</a></li>
-                        <li><a href="#" class="tab-item"><i class="fa-solid fa-layer-group"></i> Thể Loại</a></li>
-                        <li><a href="#" class="tab-item"><i class="fa-solid fa-clock-rotate-left"></i> Lịch Sử</a></li>
+                        <li><a href="index.html" class="tab-item active">Trang Chủ</a></li>
+                        <li><a href="#" class="tab-item">Thể Loại</a></li>
+                        <li><a href="#" class="tab-item">Lịch Sử</a></li>
                         <div id="underline"></div>
                     </ul>
                 </nav>
-
-                <div class="search-container">
-                    <div class="search-box">
-                        <i class="fa-solid fa-magnifying-glass" style="color:var(--gray)"></i>
-                        <input type="text" id="desktopSearch" placeholder="Tìm anime...">
-                    </div>
+                <div id="userZone">
+                    <button onclick="location.href='auth.html'" style="background:var(--primary); color:white; border:none; padding:8px 20px; border-radius:20px; font-weight:800; cursor:pointer;">LOGIN</button>
                 </div>
-
-                <div id="userZone"></div>
             </div>
         </div>
     </header>
 
     <nav class="mobile-nav">
         <a href="index.html" class="active"><i class="fa-solid fa-house"></i><span>Home</span></a>
-        <a href="javascript:void(0)" onclick="toggleMobileSearch()"><i class="fa-solid fa-magnifying-glass"></i><span>Tìm kiếm</span></a>
+        <a href="#"><i class="fa-solid fa-magnifying-glass"></i><span>Tìm kiếm</span></a>
         <a href="#"><i class="fa-solid fa-clock-rotate-left"></i><span>Lịch sử</span></a>
-        <a href="auth.html"><i class="fa-solid fa-user"></i><span>Cá nhân</span></a>
+        <a href="javascript:void(0)" id="mobileUserBtn"><i class="fa-solid fa-user"></i><span>Cá nhân</span></a>
     </nav>
 
-    <div class="mobile-search-ui" id="mobileSearchUI">
-        <div class="m-search-header">
-            <input type="text" class="m-search-input" placeholder="Nhập tên phim...">
-            <button onclick="toggleMobileSearch()" style="background:none; border:none; color:white; font-size:20px;"><i class="fa-solid fa-xmark"></i></button>
-        </div>
-        <p style="color:var(--gray); font-size:14px;">Gợi ý tìm kiếm:</p>
-        <div id="mSearchResult"></div>
+    <div id="userMenu" class="user-dropdown">
+        <p id="userEmail" style="font-size: 12px; margin-bottom: 10px; color: var(--gray);"></p>
+        <button id="btnLogout" style="width:100%; background:var(--primary); border:none; color:white; padding:8px; border-radius:8px; font-weight:700; cursor:pointer;">Đăng xuất</button>
     </div>
 
-    <main class="container" style="max-width:1400px; margin:0 auto; padding: 0 20px;">
+    <main class="container" style="max-width:1400px; margin:0 auto; padding:0 20px;">
         <div class="hero-wrapper">
-            <section class="hero" id="heroSlider">
-                <div id="heroBgContainer"></div>
-                <div class="hero-content" id="heroInfo">
-                    <h1 id="heroTitle">Đang tải...</h1>
-                    <p id="heroDesc" style="color:#ccc; margin:15px 0 25px; display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;"></p>
-                    <button id="heroBtn" style="background:var(--primary); color:white; border:none; padding:12px 35px; border-radius:10px; font-weight:800; cursor:pointer;">XEM NGAY</button>
+            <section class="hero">
+                <div id="heroBg"></div>
+                <div class="hero-content" id="heroText">
+                    <h1 id="hTitle">KITO ANIME</h1>
+                    <p id="hDesc" style="color:var(--gray); margin-bottom:20px;"></p>
+                    <button id="hBtn" style="background:var(--primary); color:white; border:none; padding:12px 30px; border-radius:10px; font-weight:800; cursor:pointer;">XEM NGAY</button>
                 </div>
-                
-                <button class="hero-btn btn-prev" onclick="changeHero(-1)"><i class="fa-solid fa-chevron-left"></i></button>
-                <button class="hero-btn btn-next" onclick="changeHero(1)"><i class="fa-solid fa-chevron-right"></i></button>
+                <button class="hero-btn btn-prev" onclick="moveHero(-1)"><i class="fa-solid fa-chevron-left"></i></button>
+                <button class="hero-btn btn-next" onclick="moveHero(1)"><i class="fa-solid fa-chevron-right"></i></button>
             </section>
         </div>
 
-        <h2 class="section-title">Mới cập nhật</h2>
-        <div class="anime-grid" id="newGrid"></div>
-
-        <h2 class="section-title">Gợi ý cho bạn</h2>
-        <div class="anime-grid" id="recGrid"></div>
+        <h2 style="margin: 40px 0 20px; font-weight: 900; font-size: 24px; border-left: 5px solid var(--primary); padding-left: 15px;">MỚI CẬP NHẬT</h2>
+        <div class="anime-grid" id="mainGrid"></div>
     </main>
 
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-        import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
-        
+        import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+        import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+
         const firebaseConfig = { apiKey: "AIzaSyBP9ZnwzQrrRY5JNy1DANm3boaWgvhoS_w", authDomain: "kito-anime-vn.firebaseapp.com", projectId: "kito-anime-vn", storageBucket: "kito-anime-vn.firebasestorage.app", appId: "1:287480619398:web:f40d137345407f27874c07" };
         const app = initializeApp(firebaseConfig);
         const auth = getAuth(app);
+        const db = getFirestore(app);
 
-        let heroList = [];
-        let heroIndex = 0;
+        let currentUser = null;
+        let movies = [];
+        let heroIdx = 0;
 
-        // --- TÌM KIẾM ---
-        window.toggleMobileSearch = function() {
-            document.getElementById('mobileSearchUI').classList.toggle('active');
-        };
+        // --- AUTH LOGIC ---
+        onAuthStateChanged(auth, (user) => {
+            currentUser = user;
+            const userZone = document.getElementById('userZone');
+            const mobileBtn = document.getElementById('mobileUserBtn');
 
-        // --- BANNER LOGIC ---
-        async function loadData() {
-            try {
-                const res = await fetch('./api.json');
-                const data = await res.json();
+            if (user) {
+                const avatar = user.photoURL || `https://api.dicebear.com/7.x/avataaars/svg?seed=${user.email}`;
+                const ui = `<img src="${avatar}" onclick="toggleUserMenu()" style="width:35px; height:35px; border-radius:50%; border:2px solid var(--primary); cursor:pointer;">`;
+                userZone.innerHTML = ui;
+                document.getElementById('userEmail').innerText = user.email;
                 
-                renderGrid(data.updated, 'newGrid');
-                renderGrid(data.recommended, 'recGrid');
+                // Khi nhấn "Cá nhân" trên Mobile
+                mobileBtn.onclick = () => toggleUserMenu();
+            } else {
+                mobileBtn.onclick = () => location.href = 'auth.html';
+            }
+        });
 
-                heroList = data.updated.filter(m => m.image_banner).slice(0, 5);
-                if(heroList.length > 0) updateHero();
-            } catch (e) { console.error(e); }
+        window.toggleUserMenu = () => document.getElementById('userMenu').classList.toggle('active');
+        document.getElementById('btnLogout').onclick = () => signOut(auth).then(() => location.reload());
+
+        // --- DATA & STATS ---
+        async function fetchMovieStats(id) {
+            try {
+                const snap = await getDoc(doc(db, "movie_stats", String(id)));
+                if(snap.exists()) {
+                    const data = snap.data();
+                    const rate = data.rateCount > 0 ? (data.rating / data.rateCount).toFixed(1) : "0.0";
+                    document.getElementById(`rate-${id}`).innerHTML = `<i class="fa-solid fa-star"></i> ${rate}`;
+                    document.getElementById(`view-${id}`).innerHTML = `<i class="fa-solid fa-eye"></i> ${data.views || 0}`;
+                }
+            } catch (e) {}
         }
 
-        window.changeHero = function(dir) {
-            heroIndex = (heroIndex + dir + heroList.length) % heroList.length;
+        async function init() {
+            const res = await fetch('./api.json');
+            const data = await res.json();
+            movies = data.updated;
+
+            // Render Grid
+            document.getElementById('mainGrid').innerHTML = movies.map(m => {
+                setTimeout(() => fetchMovieStats(m.id), 200);
+                return `
+                <a href="watch.html?id=${m.id}" class="anime-card">
+                    <div class="card-img">
+                        <img src="${m.image}" loading="lazy">
+                        <div class="badge-stats" id="rate-${m.id}"><i class="fa-solid fa-star"></i> --</div>
+                        <div class="badge-views" id="view-${m.id}"><i class="fa-solid fa-eye"></i> --</div>
+                    </div>
+                    <div style="padding:15px">
+                        <h3 style="font-size:14px; font-weight:700; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">${m.title}</h3>
+                    </div>
+                </a>`;
+            }).join('');
+
+            updateHero();
+        }
+
+        window.moveHero = (dir) => {
+            heroIdx = (heroIdx + dir + 5) % 5;
             updateHero();
         }
 
         function updateHero() {
-            const m = heroList[heroIndex];
-            const container = document.getElementById('heroBgContainer');
-            const info = document.getElementById('heroInfo');
+            const m = movies[heroIdx];
+            if(!m) return;
+            const bg = document.getElementById('heroBg');
+            const txt = document.getElementById('heroText');
             
-            container.innerHTML = `<img src="${m.image_banner}" class="hero-bg active">`;
-            document.getElementById('heroTitle').innerText = m.title;
-            document.getElementById('heroDesc').innerText = m.description || "";
-            document.getElementById('heroBtn').onclick = () => location.href = `watch.html?id=${m.id}`;
+            bg.innerHTML = `<img src="${m.image_banner}" class="hero-bg active">`;
+            document.getElementById('hTitle').innerText = m.title;
+            document.getElementById('hDesc').innerText = m.description || "";
+            document.getElementById('hBtn').onclick = () => location.href = `watch.html?id=${m.id}`;
             
-            info.classList.remove('active');
-            setTimeout(() => info.classList.add('active'), 50);
+            txt.classList.remove('active');
+            setTimeout(() => txt.classList.add('active'), 50);
         }
 
-        function renderGrid(list, id) {
-            const container = document.getElementById(id);
-            container.innerHTML = list.map(m => `
-                <a href="watch.html?id=${m.id}" class="anime-card">
-                    <div style="height:280px; overflow:hidden; border-radius:15px; border:1px solid var(--border)">
-                        <img src="${m.image}" style="width:100%; height:100%; object-fit:cover;">
-                    </div>
-                    <h3 style="font-size:14px; margin-top:12px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">${m.title}</h3>
-                </a>
-            `).join('');
-        }
-
-        // --- TABBAR ANIMATION ---
-        const underline = document.getElementById('underline');
-        function moveUnderline(el) {
-            underline.style.opacity = "1";
-            underline.style.width = `${el.offsetWidth}px`;
-            underline.style.left = `${el.offsetLeft}px`;
-        }
-        document.querySelectorAll('.tab-item').forEach(tab => {
-            tab.onmouseenter = () => moveUnderline(tab);
-        });
-        document.getElementById('tabList').onmouseleave = () => {
-            moveUnderline(document.querySelector('.tab-item.active'));
-        };
-
-        loadData();
-        setInterval(() => changeHero(1), 10000);
+        init();
     </script>
 </body>
 </html>
