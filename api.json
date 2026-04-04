@@ -1,0 +1,64 @@
+{
+  "updated": [
+    {
+      "id": "anime-01",
+      "title": "Solo Leveling",
+      "image": "https://img.flawless.org/wp-content/uploads/2023/04/Solo-Leveling-1.jpg",
+      "image_banner": "https://static1.colliderimages.com/wordpress/wp-content/uploads/2023/07/solo-leveling-anime-release-window.jpg",
+      "description": "Trong một thế giới nơi những thợ săn phải chiến đấu với quái vật, Sung Jin-Woo là thợ săn yếu nhất. Sau một biến cố, anh nhận được hệ thống giúp mình thăng cấp không giới hạn."
+    },
+    {
+      "id": "anime-02",
+      "title": "One Piece",
+      "image": "https://images6.alphacoders.com/132/1325852.png",
+      "image_banner": "https://images8.alphacoders.com/132/1325851.png",
+      "description": "Cuộc hành trình của Monkey D. Luffy và băng hải tặc Mũ Rơm trên con đường tìm kiếm kho báu vĩ đại nhất thế giới và trở thành Vua Hải Tặc."
+    },
+    {
+      "id": "anime-03",
+      "title": "Jujutsu Kaisen Season 2",
+      "image": "https://images2.alphacoders.com/132/1322047.jpeg",
+      "image_banner": "https://images7.alphacoders.com/132/1322046.jpeg",
+      "description": "Quay ngược thời gian về thời học sinh của Gojo Satoru và Geto Suguru, khám phá biến cố đã làm thay đổi mối quan hệ của họ mãi mãi."
+    }
+  ],
+  "comingSoon": [
+    {
+      "id": "anime-04",
+      "title": "Chainsaw Man Part 2",
+      "image": "https://images8.alphacoders.com/124/1247443.jpg"
+    },
+    {
+      "id": "anime-05",
+      "title": "Spy x Family Code: White",
+      "image": "https://images4.alphacoders.com/131/1315574.jpeg"
+    },
+    {
+      "id": "anime-06",
+      "title": "Demon Slayer: Infinity Castle",
+      "image": "https://images3.alphacoders.com/132/1321457.png"
+    }
+  ],
+  "recommended": [
+    {
+      "id": "anime-07",
+      "title": "Attack on Titan",
+      "image": "https://images.alphacoders.com/133/1331003.jpeg"
+    },
+    {
+      "id": "anime-08",
+      "title": "Naruto Shippuden",
+      "image": "https://images.alphacoders.com/131/1312061.jpeg"
+    },
+    {
+      "id": "anime-09",
+      "title": "Bleach: Thousand-Year Blood War",
+      "image": "https://images8.alphacoders.com/125/1255855.jpg"
+    },
+    {
+      "id": "anime-10",
+      "title": "Dragon Ball Super",
+      "image": "https://images2.alphacoders.com/681/681995.jpg"
+    }
+  ]
+}
