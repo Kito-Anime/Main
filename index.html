@@ -27,20 +27,30 @@
             from { opacity: 0; transform: translateY(30px); } 
             to { opacity: 1; transform: translateY(0); } 
         }
-        .reveal { animation: fadeInUp 0.8s cubic-bezier(0.2, 1, 0.3, 1) forwards; }
-
+        .reveal { opacity: 0; animation: fadeInUp 0.8s cubic-bezier(0.2, 1, 0.3, 1) forwards; }
         @keyframes rgb-flow { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
 
-        /* --- NAVBAR --- */
+        /* --- NAVBAR PC --- */
         .navbar { 
             background: var(--glass); height: 80px; display: flex; 
             align-items: center; position: fixed; top: 0; width: 100%; z-index: 1000; 
             border-bottom: 1px solid var(--border); backdrop-filter: blur(20px);
         }
         .nav-content { width: 100%; max-width: 1400px; margin: 0 auto; padding: 0 20px; display: flex; align-items: center; justify-content: space-between; }
-        
         .logo { font-size: 24px; font-weight: 900; text-transform: uppercase; cursor: pointer; display: flex; align-items: center; gap: 8px; }
         .logo span { color: var(--primary); }
+
+        /* --- SEARCH BOX --- */
+        .search-results-box {
+            position: absolute; top: 70px; right: 0; width: 350px; 
+            background: var(--card-bg); border: 1px solid var(--primary);
+            border-radius: 12px; display: none; max-height: 400px; overflow-y: auto; z-index: 2000;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+        }
+        .search-results-box.active { display: block; }
+        .s-item { display: flex; gap: 12px; padding: 10px; border-bottom: 1px solid var(--border); text-decoration: none; color: white; transition: 0.2s; }
+        .s-item:hover { background: rgba(255, 71, 87, 0.1); }
+        .s-item img { width: 45px; height: 60px; object-fit: cover; border-radius: 4px; }
 
         /* --- BANNER --- */
         .hero-wrapper { 
@@ -58,39 +68,47 @@
             color: white; cursor: pointer; z-index: 10; display: flex; align-items: center; justify-content: center;
             box-shadow: 0 0 15px var(--primary); transition: 0.3s;
         }
+        .h-arrow:hover { transform: translateY(-50%) scale(1.1); }
 
         /* --- CARDS --- */
         .anime-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 20px; }
         .anime-card { background: var(--card-bg); border-radius: 12px; overflow: hidden; border: 1px solid var(--border); transition: 0.3s; text-decoration: none; color: white; position: relative; }
         .anime-card:hover { transform: translateY(-8px); border-color: var(--primary); }
-        .card-img { width: 100%; aspect-ratio: 2 / 3; position: relative; overflow: hidden; }
+        .card-img { width: 100%; aspect-ratio: 2 / 3; position: relative; overflow: hidden; background: #1a1a1e; }
         .card-img img { width: 100%; height: 100%; object-fit: cover; transition: 0.5s; }
         .anime-card:hover .card-img img { transform: scale(1.1); }
         
         .badge-rate { position: absolute; top: 8px; left: 8px; background: rgba(0,0,0,0.85); padding: 3px 8px; border-radius: 5px; font-size: 11px; color: #ffc107; font-weight: 800; backdrop-filter: blur(4px); }
         .badge-views { position: absolute; bottom: 8px; right: 8px; background: rgba(0,0,0,0.85); padding: 3px 8px; border-radius: 5px; font-size: 10px; color: #fff; backdrop-filter: blur(4px); }
 
-        /* --- SEARCH BOX (PC) --- */
-        .search-results-box {
-            position: absolute; top: 70px; right: 0; width: 350px; 
-            background: var(--card-bg); border: 1px solid var(--primary);
-            border-radius: 12px; display: none; max-height: 400px; overflow-y: auto; z-index: 2000;
-        }
-        .search-results-box.active { display: block; }
-
         /* --- MOBILE RESPONSIVE --- */
         @media (max-width: 1024px) {
-            /* Loại bỏ thanh tìm kiếm và avatar trên header mobile */
+            /* Ẩn tìm kiếm & cá nhân trên thanh top theo yêu cầu */
             .nav-right-side { display: none !important; } 
-            .nav-content { justify-content: center; } /* Đưa Kito Anime ra giữa */
+            
+            /* Logo Kito Anime ra giữa tuyệt đối */
+            .nav-content { justify-content: center; } 
+            
             .hero { height: 350px; }
-            .mobile-nav { display: flex; position: fixed; bottom: 0; width: 100%; height: 65px; background: var(--glass); z-index: 1000; justify-content: space-around; align-items: center; border-top: 1px solid var(--border); }
-            .mobile-nav a { display: flex; flex-direction: column; align-items: center; font-size: 10px; color: var(--gray); text-decoration: none; }
+            
+            /* Bottom Tabbar có 5 nút */
+            .mobile-nav { display: flex; position: fixed; bottom: 0; width: 100%; height: 65px; background: var(--glass); z-index: 1000; justify-content: space-around; align-items: center; border-top: 1px solid var(--border); backdrop-filter: blur(20px); }
+            .mobile-nav a { display: flex; flex-direction: column; align-items: center; font-size: 10px; color: var(--gray); text-decoration: none; gap: 4px; }
             .mobile-nav a.active { color: var(--primary); }
+            
+            /* Thanh tìm kiếm trượt từ trên xuống cho Mobile */
+            #mobileSearchTop { position: fixed; top: -100px; left: 0; width: 100%; height: 75px; background: var(--dark); z-index: 2500; display: flex; align-items: center; padding: 0 15px; transition: 0.4s; border-bottom: 2px solid var(--primary); }
+            #mobileSearchTop.active { top: 0; }
         }
     </style>
 </head>
 <body>
+
+    <div id="mobileSearchTop">
+        <input type="text" id="mSearchInput" placeholder="Tìm kiếm anime..." style="flex:1; padding:12px 20px; border-radius:25px; border:none; background:#1a1a1e; color:white; outline:none">
+        <i class="fa-solid fa-xmark" style="margin-left:15px; color:var(--primary); font-size:24px; cursor:pointer;" onclick="toggleSearch(false)"></i>
+        <div id="mSearchRes" class="search-results-box" style="left:5%; width:90%; top:80px"></div>
+    </div>
 
     <header class="navbar">
         <div class="nav-content">
@@ -101,7 +119,7 @@
             </div>
             
             <div class="nav-right-side" style="position:relative; display: flex; align-items: center;">
-                <input type="text" id="pcSearch" placeholder="Tìm kiếm phim..." style="background:#1a1a1e; border:1px solid var(--border); color:white; border-radius:20px; padding:7px 20px; outline:none; width:220px">
+                <input type="text" id="pcSearch" placeholder="Tìm kiếm phim..." style="background:#1a1a1e; border:1px solid var(--border); color:white; border-radius:20px; padding:7px 20px; outline:none; width:250px">
                 <div id="pcSearchRes" class="search-results-box"></div>
                 <div id="userPC" style="margin-left:20px"></div>
             </div>
@@ -109,7 +127,7 @@
     </header>
 
     <main style="max-width:1400px; margin:0 auto; padding:20px;">
-        <div class="hero-wrapper reveal">
+        <div class="hero-wrapper reveal" style="animation-delay: 0.1s;">
             <section class="hero">
                 <div id="hBg" class="hero-bg"></div>
                 <button class="h-arrow" style="left: 20px;" onclick="changeHero(-1)"><i class="fa-solid fa-chevron-left"></i></button>
@@ -122,17 +140,28 @@
             </section>
         </div>
 
-        <h2 style="margin:40px 0 20px; border-left:4px solid var(--primary); padding-left:15px">MỚI CẬP NHẬT</h2>
-        <div class="anime-grid" id="gridUpdate"></div>
+        <div class="reveal" style="animation-delay: 0.2s;">
+            <h2 style="margin:40px 0 20px; border-left:4px solid var(--primary); padding-left:15px">SẮP PHÁT HÀNH</h2>
+            <div class="anime-grid" id="gridComing"></div>
+        </div>
 
-        <h2 style="margin:40px 0 20px; border-left:4px solid var(--primary); padding-left:15px">ĐỀ XUẤT CHO BẠN</h2>
-        <div class="anime-grid" id="gridRec"></div>
+        <div class="reveal" style="animation-delay: 0.3s;">
+            <h2 style="margin:40px 0 20px; border-left:4px solid var(--primary); padding-left:15px">MỚI CẬP NHẬT</h2>
+            <div class="anime-grid" id="gridUpdate"></div>
+        </div>
+
+        <div class="reveal" style="animation-delay: 0.4s;">
+            <h2 style="margin:40px 0 20px; border-left:4px solid var(--primary); padding-left:15px">ĐỀ XUẤT CHO BẠN</h2>
+            <div class="anime-grid" id="gridRec"></div>
+        </div>
     </main>
 
     <nav class="mobile-nav">
-        <a href="index.html" class="active"><i class="fa-solid fa-house"></i><span>Trang chủ</span></a>
-        <a href="#"><i class="fa-solid fa-clock-rotate-left"></i><span>Lịch sử</span></a>
-        <a href="javascript:void(0)" id="mobileUser"><i class="fa-solid fa-user"></i><span>Cá nhân</span></a>
+        <a href="index.html" class="active"><i class="fa-solid fa-house" style="font-size: 16px;"></i><span>Trang chủ</span></a>
+        <a href="javascript:void(0)" onclick="toggleSearch(true)"><i class="fa-solid fa-magnifying-glass" style="font-size: 16px;"></i><span>Tìm kiếm</span></a>
+        <a href="#"><i class="fa-regular fa-calendar-days" style="font-size: 16px;"></i><span>Lịch chiếu</span></a>
+        <a href="#"><i class="fa-solid fa-clock-rotate-left" style="font-size: 16px;"></i><span>Lịch sử</span></a>
+        <a href="javascript:void(0)" id="mobileUser"><i class="fa-solid fa-user" style="font-size: 16px;"></i><span>Cá nhân</span></a>
     </nav>
 
     <script type="module">
@@ -151,34 +180,39 @@
         const auth = getAuth(app);
         const db = getFirestore(app);
 
+        let allMovies = [];
         let heroMovies = [];
         let heroIdx = 0;
 
-        // --- REALTIME FIRESTORE (Fix số sao & lượt xem) ---
+        // --- REALTIME FIRESTORE (Hiển thị 0.0 nếu chưa có dữ liệu) ---
         function syncStats(movieId) {
             const docRef = doc(db, "movie_stats", String(movieId));
             onSnapshot(docRef, (snap) => {
+                const rEl = document.getElementById(`r-${movieId}`);
+                const vEl = document.getElementById(`v-${movieId}`);
+                
                 if (snap.exists()) {
                     const data = snap.data();
-                    const score = data.rateCount > 0 ? (data.rating / data.rateCount).toFixed(1) : "10.0";
+                    const score = data.rateCount > 0 ? (data.rating / data.rateCount).toFixed(1) : "0.0";
                     const views = data.views || 0;
                     
-                    const rEl = document.getElementById(`r-${movieId}`);
-                    const vEl = document.getElementById(`v-${movieId}`);
                     if (rEl) rEl.innerText = score;
                     if (vEl) vEl.innerText = views.toLocaleString();
+                } else {
+                    if (rEl) rEl.innerText = "0.0";
+                    if (vEl) vEl.innerText = "0";
                 }
             });
         }
 
-        // --- RENDER ---
+        // --- RENDER DANH SÁCH ---
         function render(list, targetId) {
             const grid = document.getElementById(targetId);
             grid.innerHTML = list.map(m => `
-                <a href="watch.html?id=${m.id}" class="anime-card reveal">
+                <a href="watch.html?id=${m.id}" class="anime-card">
                     <div class="card-img">
                         <img src="${m.image}" loading="lazy">
-                        <div class="badge-rate"><i class="fa-solid fa-star"></i> <span id="r-${m.id}">10.0</span></div>
+                        <div class="badge-rate"><i class="fa-solid fa-star"></i> <span id="r-${m.id}">0.0</span></div>
                         <div class="badge-views"><i class="fa-solid fa-eye"></i> <span id="v-${m.id}">0</span></div>
                     </div>
                     <div style="padding:10px">
@@ -186,10 +220,36 @@
                     </div>
                 </a>
             `).join('');
+            
             list.forEach(m => syncStats(m.id));
         }
 
-        // --- BANNER LOGIC ---
+        // --- TÌM KIẾM ---
+        function setupSearch(inputId, resId) {
+            const input = document.getElementById(inputId);
+            const res = document.getElementById(resId);
+            input.addEventListener('input', (e) => {
+                const val = e.target.value.toLowerCase().trim();
+                if (!val) { res.classList.remove('active'); return; }
+                const filtered = allMovies.filter(m => m.title.toLowerCase().includes(val)).slice(0, 6);
+                res.classList.add('active');
+                res.innerHTML = filtered.length ? filtered.map(m => `
+                    <a href="watch.html?id=${m.id}" class="s-item">
+                        <img src="${m.image}">
+                        <div>
+                            <div style="font-weight:700; font-size:13px">${m.title}</div>
+                            <div style="font-size:11px; color:var(--gray)">Nhấn để xem</div>
+                        </div>
+                    </a>`).join('') : '<p style="padding:15px; color:var(--gray); text-align:center;">Không tìm thấy anime này...</p>';
+            });
+        }
+
+        window.toggleSearch = (show) => {
+            document.getElementById('mobileSearchTop').classList.toggle('active', show);
+            if(!show) document.getElementById('mSearchRes').classList.remove('active');
+        };
+
+        // --- LOGIC BANNER ---
         window.changeHero = (dir) => {
             heroIdx = (heroIdx + dir + heroMovies.length) % heroMovies.length;
             const m = heroMovies[heroIdx];
@@ -197,30 +257,36 @@
             document.getElementById('hBg').style.backgroundImage = `url(${m.image_banner})`;
             document.getElementById('hBg').style.backgroundSize = "cover";
             document.getElementById('hTitle').innerText = m.title;
-            document.getElementById('hDesc').innerText = m.description || "Chào mừng bạn đến với Kito Anime - Thế giới hoạt hình đỉnh cao.";
+            document.getElementById('hDesc').innerText = m.description || "Chào mừng bạn đến với Kito Anime - Xem anime vietsub online chất lượng cao.";
             document.getElementById('hBtn').onclick = () => location.href = `watch.html?id=${m.id}`;
         };
 
-        // --- INIT ---
+        // --- KHỞI TẠO DỮ LIỆU ---
         async function init() {
             try {
                 const res = await fetch('./api.json');
                 const data = await res.json();
+                
+                allMovies = [...(data.comingSoon || []), ...(data.updated || []), ...(data.recommended || [])];
                 heroMovies = data.updated.slice(0, 5);
                 
-                render(data.updated, 'gridUpdate');
-                render(data.recommended, 'gridRec');
+                render(data.comingSoon || [], 'gridComing');
+                render(data.updated || [], 'gridUpdate');
+                render(data.recommended || [], 'gridRec');
                 changeHero(0);
-            } catch (e) { console.error("Data Load Error:", e); }
+
+                setupSearch('pcSearch', 'pcSearchRes');
+                setupSearch('mSearchInput', 'mSearchRes');
+            } catch (e) { console.error("Lỗi tải dữ liệu:", e); }
         }
 
-        // --- AUTH ---
+        // --- XÁC THỰC NGƯỜI DÙNG ---
         onAuthStateChanged(auth, (user) => {
             const pc = document.getElementById('userPC');
             const mb = document.getElementById('mobileUser');
             if (user) {
                 const ava = user.photoURL || `https://api.dicebear.com/7.x/avataaars/svg?seed=${user.email}`;
-                pc.innerHTML = `<img src="${ava}" style="width:35px; height:35px; border-radius:50%; border:2px solid var(--primary); cursor:pointer">`;
+                pc.innerHTML = `<img src="${ava}" style="width:35px; height:35px; border-radius:50%; border:2px solid var(--primary); cursor:pointer; object-fit:cover;">`;
                 mb.onclick = () => location.href = "profile.html";
             } else {
                 pc.innerHTML = `<button onclick="location.href='auth.html'" style="background:var(--primary); color:white; border:none; padding:7px 15px; border-radius:20px; cursor:pointer; font-weight:800">LOGIN</button>`;
