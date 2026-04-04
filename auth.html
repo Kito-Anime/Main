@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Xác thực - KITO ANIME</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary: #ff4757;
+            --dark: #0a0a0c;
+            --card-bg: rgba(22, 24, 29, 0.8);
+            --text: #ffffff;
+            --gray: #9ca3af;
+            --border: rgba(255, 255, 255, 0.1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
+        
+        body { 
+            background: radial-gradient(circle at top right, #1a1a2e, #0a0a0c);
+            color: var(--text);
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        /* Hiệu ứng nền RGB chạy */
+        .auth-wrapper {
+            position: relative;
+            padding: 3px;
+            border-radius: 25px;
+            background: linear-gradient(45deg, #ff4757, #7158e2, #00d2d3, #ff4757);
+            background-size: 400% 400%;
+            animation: rgb-border 8s linear infinite;
+            width: 100%;
+            max-width: 420px;
+            margin: 20px;
+        }
+
+        @keyframes rgb-border {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .auth-container {
+            background: var(--dark);
+            border-radius: 22px;
+            padding: 40px 30px;
+            backdrop-filter: blur(20px);
+            text-align: center;
+        }
+
+        .logo { font-size: 28px; font-weight: 900; margin-bottom: 30px; cursor: pointer; }
+        .logo span { color: var(--primary); }
+
+        h2 { font-size: 22px; margin-bottom: 10px; font-weight: 800; }
+        p.subtitle { color: var(--gray); font-size: 14px; margin-bottom: 30px; }
+
+        .form-group { margin-bottom: 20px; text-align: left; }
+        .form-group label { display: block; font-size: 12px; font-weight: 700; color: var(--gray); margin-bottom: 8px; text-transform: uppercase; }
+        
+        .input-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+        .input-wrapper i { position: absolute; left: 15px; color: var(--gray); }
+        .input-wrapper input {
+            width: 100%;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid var(--border);
+            padding: 12px 15px 12px 45px;
+            border-radius: 12px;
+            color: white;
+            outline: none;
+            transition: 0.3s;
+        }
+        .input-wrapper input:focus { border-color: var(--primary); background: rgba(255,255,255,0.1); }
+
+        .btn-auth {
+            width: 100%;
+            padding: 14px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-weight: 800;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: 0.3s;
+            box-shadow: 0 5px 15px rgba(255, 71, 87, 0.3);
+        }
+        .btn-auth:hover { transform: translateY(-2px); filter: brightness(1.1); }
+
+        .divider { margin: 25px 0; position: relative; border-bottom: 1px solid var(--border); }
+        .divider span { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: var(--dark); padding: 0 15px; color: var(--gray); font-size: 12px; }
+
+        .google-btn {
+            width: 100%;
+            padding: 12px;
+            background: white;
+            color: #000;
+            border: none;
+            border-radius: 12px;
+            font-weight: 700;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            transition: 0.3s;
+        }
+
+        .switch-mode { margin-top: 25px; font-size: 14px; color: var(--gray); }
+        .switch-mode b { color: var(--primary); cursor: pointer; }
+
+        /* Ẩn hiện Form */
+        .hidden { display: none; }
+    </style>
+</head>
+<body>
+
+    <div class="auth-wrapper">
+        <div class="auth-container">
+            <div class="logo" onclick="location.href='index.html'">KITO <span>ANIME</span></div>
+            
+            <div id="loginForm">
+                <h2>Chào mừng trở lại!</h2>
+                <p class="subtitle">Đăng nhập để lưu lịch sử xem phim.</p>
+                
+                <div class="form-group">
+                    <label>Email</label>
+                    <div class="input-wrapper">
+                        <i class="fa-solid fa-envelope"></i>
+                        <input type="email" id="loginEmail" placeholder="name@email.com">
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label>Mật khẩu</label>
+                    <div class="input-wrapper">
+                        <i class="fa-solid fa-lock"></i>
+                        <input type="password" id="loginPassword" placeholder="••••••••">
+                    </div>
+                </div>
+
+                <button class="btn-auth" id="btnLogin">ĐĂNG NHẬP</button>
+            </div>
+
+            <div id="registerForm" class="hidden">
+                <h2>Tạo tài khoản mới</h2>
+                <p class="subtitle">Tham gia cộng đồng KITO ANIME ngay.</p>
+                
+                <div class="form-group">
+                    <label>Email</label>
+                    <div class="input-wrapper">
+                        <i class="fa-solid fa-envelope"></i>
+                        <input type="email" id="regEmail" placeholder="name@email.com">
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label>Mật khẩu</label>
+                    <div class="input-wrapper">
+                        <i class="fa-solid fa-lock"></i>
+                        <input type="password" id="regPassword" placeholder="Tối thiểu 6 ký tự">
+                    </div>
+                </div>
+
+                <button class="btn-auth" id="btnRegister">ĐĂNG KÝ NGAY</button>
+            </div>
+
+            <div class="divider"><span>HOẶC</span></div>
+
+            <button class="google-btn" id="btnGoogle">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_放f_logo.png" width="18" style="vertical-align: middle;">
+                Tiếp tục với Google
+            </button>
+
+            <div class="switch-mode" id="modeText">
+                Chưa có tài khoản? <b onclick="toggleMode()">Đăng ký</b>
+            </div>
+        </div>
+    </div>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import { 
+            getAuth, 
+            signInWithEmailAndPassword, 
+            createUserWithEmailAndPassword, 
+            GoogleAuthProvider, 
+            signInWithPopup 
+        } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+
+        // Cấu hình Firebase đồng bộ với các trang khác
+        const firebaseConfig = {
+            apiKey: "AIzaSyBP9ZnwzQrrRY5JNy1DANm3boaWgvhoS_w",
+            authDomain: "kito-anime-vn.firebaseapp.com",
+            projectId: "kito-anime-vn",
+            storageBucket: "kito-anime-vn.firebasestorage.app",
+            appId: "1:287480619398:web:f40d137345407f27874c07"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const provider = new GoogleAuthProvider();
+
+        // Chuyển đổi qua lại Login/Register
+        window.toggleMode = function() {
+            const login = document.getElementById('loginForm');
+            const reg = document.getElementById('registerForm');
+            const text = document.getElementById('modeText');
+
+            if (login.classList.contains('hidden')) {
+                login.classList.remove('hidden');
+                reg.classList.add('hidden');
+                text.innerHTML = 'Chưa có tài khoản? <b onclick="toggleMode()">Đăng ký</b>';
+            } else {
+                login.classList.add('hidden');
+                reg.classList.remove('hidden');
+                text.innerHTML = 'Đã có tài khoản? <b onclick="toggleMode()">Đăng nhập</b>';
+            }
+        }
+
+        // Xử lý Đăng ký
+        document.getElementById('btnRegister').onclick = async () => {
+            const email = document.getElementById('regEmail').value;
+            const pass = document.getElementById('regPassword').value;
+            try {
+                await createUserWithEmailAndPassword(auth, email, pass);
+                alert("Đăng ký thành công!");
+                window.location.href = 'index.html';
+            } catch (e) { alert("Lỗi: " + e.message); }
+        };
+
+        // Xử lý Đăng nhập
+        document.getElementById('btnLogin').onclick = async () => {
+            const email = document.getElementById('loginEmail').value;
+            const pass = document.getElementById('loginPassword').value;
+            try {
+                await signInWithEmailAndPassword(auth, email, pass);
+                window.location.href = 'index.html';
+            } catch (e) { alert("Sai tài khoản hoặc mật khẩu!"); }
+        };
+
+        // Đăng nhập Google
+        document.getElementById('btnGoogle').onclick = async () => {
+            try {
+                await signInWithPopup(auth, provider);
+                window.location.href = 'index.html';
+            } catch (e) { console.error(e); }
+        };
+    </script>
+</body>
+</html>
