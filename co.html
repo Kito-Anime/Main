@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Anime Stream</title>
+    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #0f0f0f;
+            color: #ffffff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
+        h1 { color: #ff4500; }
+        .container {
+            width: 100%;
+            max-width: 900px;
+            background: #1e1e1e;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+        }
+        video {
+            width: 100%;
+            border-radius: 8px;
+            outline: none;
+            background: black;
+        }
+        .controls {
+            margin-top: 15px;
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        button {
+            background: #333;
+            color: white;
+            border: 1px solid #444;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        button:hover {
+            background: #ff4500;
+            border-color: #ff4500;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Anime Streaming Station</h1>
+
+    <div class="container">
+        <video id="video" controls></video>
+
+        <div class="controls">
+            <button onclick="playAnime('playlist.m3u8')">Tập 1</button>
+            <button onclick="playAnime('tap2.m3u8')">Tập 2</button>
+        </div>
+    </div>
+
+    <script>
+        var video = document.getElementById('video');
+        
+        // CHỖ NÀY QUAN TRỌNG: Thay IP mà server Python đã in ra vào đây
+        var serverBaseUrl = "http://172.19.0.126:5000/stream/playlist.m3u8";
+
+        function playAnime(fileName) {
+            var videoSrc = serverBaseUrl + fileName;
+
+            if (Hls.isSupported()) {
+                var hls = new Hls();
+                hls.loadSource(videoSrc);
+                hls.attachMedia(video);
+                hls.on(Hls.Events.MANIFEST_PARSED, function() {
+                    video.play();
+                });
+            }
+            // Dành cho Safari (hỗ trợ sẵn HLS)
+            else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+                video.src = videoSrc;
+                video.addEventListener('loadedmetadata', function() {
+                    video.play();
+                });
+            }
+        }
+
+        // Tự động chạy file đầu tiên khi load trang
+        playAnime('playlist.m3u8');
+    </script>
+</body>
+</html>
